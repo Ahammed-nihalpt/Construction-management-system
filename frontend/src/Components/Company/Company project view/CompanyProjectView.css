@@ -1,0 +1,144 @@
+.project_view {
+  display: flex;
+  flex-direction: column;
+  margin-top: 15px;
+  margin-left: 20px;
+  margin-right: 20px;
+  gap: 30px;
+}
+
+.project_view .filter {
+  display: flex;
+  width: 50%;
+  align-items: center;
+  gap: 10px;
+}
+
+.filbtn {
+  color: #ffffff;
+  padding: 5px;
+  cursor: pointer;
+  background-color: #1b2433;
+  border: none;
+}
+
+.project_view .add_seacrh {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.project_view .add_seacrh .search {
+  display: flex;
+  align-items: center;
+  background-color: #ffffff;
+  padding: 10px;
+  -webkit-box-shadow: 10px 10px 15px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 15px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 15px -8px rgba(0, 0, 0, 0.75);
+}
+
+.project_view .add_seacrh .search input {
+  border: none;
+  outline: none;
+  width: 300px;
+}
+
+.border {
+  border-radius: 10px;
+  font-size: large;
+  width: 100px;
+}
+
+@media only screen and (max-width: 600px) {
+  .filbtn {
+    font-size: small;
+    padding: 4px;
+  }
+
+  .project_view {
+    display: flex;
+    flex-direction: column;
+    margin-top: 10px;
+    margin-left: 10px;
+    margin-right: 10px;
+    gap: 30px;
+  }
+  .project_view .add_seacrh .search {
+    display: flex;
+    align-items: center;
+    background-color: #ffffff;
+    padding: 5px;
+    -webkit-box-shadow: 10px 10px 15px -8px rgba(0, 0, 0, 0.75);
+    -moz-box-shadow: 10px 10px 15px -8px rgba(0, 0, 0, 0.75);
+    box-shadow: 10px 10px 15px -8px rgba(0, 0, 0, 0.75);
+  }
+  .project_view .add_seacrh .search input {
+    border: none;
+    outline: none;
+    font-size: small;
+    width: 100px;
+  }
+  .border {
+    border-radius: 10px;
+    font-size: small;
+    width: 50px;
+  }
+}
+
+.projects_list .row {
+  justify-content: space-around;
+}
+
+.single_project {
+  padding: 0px !important;
+  display: flex;
+  justify-content: center;
+  margin-bottom: 15px;
+}
+
+.single_project:hover {
+  transform: scale(1.1);
+  transition: transform 0.5s ease;
+  cursor: pointer;
+}
+
+.single_project .img {
+  background-image: url("../../../../public/Images/pic1.jpg");
+  width: 50%;
+  height: 60%;
+}
+
+.project_card {
+  background-color: #ffffff;
+  max-width: 200px;
+  border-radius: 15px;
+  padding: 2px;
+  -webkit-box-shadow: 10px 10px 14px -8px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 14px -8px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 14px -8px rgba(0, 0, 0, 0.75);
+}
+
+.project_card img {
+  width: 100%;
+  border-radius: 15px;
+}
+
+.project_des {
+  padding: 5px;
+  display: flex;
+  flex-direction: column;
+}
+
+.project_des .title {
+  font-size: 20px;
+}
+
+.project_des .location {
+  font-size: 18px;
+}
+
+.project_des .status {
+  font-size: 14px;
+  color: #00ff22;
+}

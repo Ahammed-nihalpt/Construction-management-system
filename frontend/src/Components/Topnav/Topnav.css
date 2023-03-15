@@ -1,0 +1,60 @@
+.navmain {
+  display: flex;
+}
+.navmain .top {
+  width: 100%;
+  height: 66px;
+  background-color: rgb(255, 255, 255);
+  color: rgba(0, 0, 0, 0.46);
+  display: flex;
+  -webkit-box-shadow: 10px 10px 38px 0px rgba(0, 0, 0, 0.75);
+  -moz-box-shadow: 10px 10px 38px 0px rgba(0, 0, 0, 0.75);
+  box-shadow: 10px 10px 38px 0px rgba(0, 0, 0, 0.75);
+}
+
+.navmain .top .left {
+  display: flex;
+  padding-left: 20px;
+  justify-content: flex-start;
+  align-items: center;
+  font-weight: bolder;
+}
+
+.navmain .top .right {
+  width: 50%;
+  display: flex;
+  padding-right: 40px;
+  justify-content: flex-end;
+  align-items: center;
+  gap: 30px;
+}
+
+.navmain .top .right i {
+  font-size: larger;
+}
+
+.rotate {
+  transform: rotate(30deg);
+}
+.dropdown {
+  background: orange;
+  visibility: hidden;
+  opacity: 0;
+  min-width: 5rem;
+  position: absolute;
+  transition: all 0.5s ease;
+  margin-top: 1rem;
+  left: 0;
+  display: none;
+}
+
+fa-user:hover,
+.dropdown:hover {
+  visibility: visible;
+  opacity: 1;
+  display: block;
+}
+
+.fa-user {
+  cursor: pointer;
+}

@@ -1,0 +1,20 @@
+.edit_project {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  height: 100%;
+}
+
+.edit_project .head {
+  background-color: #ffffff;
+  width: 100%;
+  color: #caced8;
+  font-weight: 700;
+  padding: 10px;
+}
+
+.edit_project .form {
+  background-color: #ffffff;
+  width: 100%;
+  height: 100%;
+}

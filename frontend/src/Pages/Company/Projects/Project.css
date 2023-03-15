@@ -1,0 +1,15 @@
+.project {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: #fff;
+  overflow-x: hidden;
+}
+
+.top_nav {
+  width: 100%;
+}
+
+.side_nav {
+  height: 100vh;
+}

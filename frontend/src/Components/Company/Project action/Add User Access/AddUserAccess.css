@@ -1,0 +1,44 @@
+.access_table {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+.tset {
+  width: 90%;
+}
+
+.access_table table {
+  border-radius: 15px !important;
+}
+
+.access_table .head {
+  background-color: #ffffff;
+  width: 100%;
+  color: #caced8;
+  font-weight: 700;
+  padding: 10px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.access_btn {
+  background-color: #282d35;
+  color: #ffffff;
+  border: none;
+  padding: 5px;
+  font-size: 15px;
+  border-radius: 3px;
+}
+
+.access_btn_remove {
+  background-color: #002356;
+  color: #ffffff;
+  border: none;
+  padding: 5px;
+  font-size: 15px;
+  border-radius: 3px;
+}

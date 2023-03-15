@@ -1,0 +1,25 @@
+.home {
+  width: 100vw;
+  height: 100vh;
+  display: flex;
+  background-color: #ecf2f6;
+  overflow-x: hidden;
+}
+
+.top_nav {
+  width: 100%;
+}
+
+.home_left {
+  width: 100%;
+  display: flex;
+  margin-left: 54px;
+  flex-direction: column;
+}
+
+.home_left_mod {
+  width: 100%;
+  display: flex;
+  margin-left: 300px;
+  flex-direction: column;
+}

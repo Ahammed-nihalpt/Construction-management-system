@@ -1,0 +1,155 @@
+.sidebar {
+  height: 100%;
+  width: 300px;
+  background-color: #1b2433;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 10px;
+  position: fixed;
+}
+
+.sidebarList {
+  height: auto;
+  width: 100%;
+  padding: 0%;
+}
+
+.sidebarList .rows {
+  width: 100%;
+  height: 50px;
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  justify-content: flex-start;
+  gap: 10px;
+  cursor: pointer;
+  align-items: center;
+}
+
+.sidebarList .rows:hover {
+  background-color: #121a27;
+}
+
+.sidebar h1 {
+  margin-top: 30px;
+  margin-bottom: 20px;
+}
+
+.sidebar .profile {
+  margin-bottom: 20px;
+}
+
+.sidebar .profile .img {
+  border-radius: 50%;
+  width: 200px;
+  height: 200px;
+  background-size: cover;
+  background-position: center center;
+}
+
+/* .sidebar .profile .img:hover {
+  filter: brightness(50%);
+} */
+
+.sidebar .main_text {
+  font-size: small;
+  align-self: flex-start;
+  color: #434b58;
+}
+
+.sidebar .side_head {
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+}
+
+.sidebar_min {
+  height: 100%;
+  width: 60px;
+  background-color: #1b2433;
+  color: #fff;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  position: fixed;
+}
+
+.sidebar_min .min_head h3 {
+  font-size: 43px;
+  /* font-weight: bolder !important; */
+}
+
+@media only screen and (max-width: 600px) {
+  .sidebar {
+    height: 100%;
+    width: 100vw;
+    background-color: #1b2433;
+    color: #fff;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 10px;
+    position: fixed;
+    z-index: 1;
+  }
+
+  .close_icon {
+    display: block !important;
+  }
+}
+
+.sidebar ul:nth-child(2) {
+  background: rgb(245, 245, 245) !important;
+}
+
+.toggle_btn h3 {
+  cursor: pointer;
+}
+
+.close_icon {
+  display: none;
+}
+
+.sidebarList .rows_min {
+  width: 100%;
+  height: 50px;
+  list-style-type: none;
+  margin: 0;
+  display: flex;
+  /* flex-direction: column; */
+  justify-content: center;
+  /* gap: 10px; */
+  align-items: center;
+}
+
+.sidebarList .rows_min:hover {
+  background-color: #121a27;
+}
+
+.cmp_name {
+  margin-top: 10px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
+
+.clicked {
+  background-color: #121a27;
+}
+
+.innerEdit {
+  position: relative;
+  top: 45%;
+  display: flex;
+  justify-content: center;
+  z-index: 99;
+  background-color: rgba(0, 0, 0, 0.5);
+  width: 100%;
+}
+
+/* .fivebr {
+  filter: brightness(50%);
+} */

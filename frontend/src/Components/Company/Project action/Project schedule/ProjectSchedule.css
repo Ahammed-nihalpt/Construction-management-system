@@ -1,0 +1,39 @@
+.schedule {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  justify-content: center;
+  align-items: center;
+}
+
+.schedule .head {
+  font-size: larger;
+  font-weight: 700;
+  color: #caced8;
+}
+
+.schedule .calender_schedules {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+}
+
+.schedule .date_schedule .show_schedules {
+  background-color: #282d35;
+  color: #ffffff;
+  padding: 10px;
+  border-radius: 5px;
+}
+
+.schedule .date_schedule .schedules_head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid #caced8;
+  padding: 5px;
+}
+
+.css-78trlr-MuiButtonBase-root-MuiIconButton-root {
+  color: #ffffff !important;
+}
