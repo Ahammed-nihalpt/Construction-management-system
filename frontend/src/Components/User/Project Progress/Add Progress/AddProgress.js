@@ -94,6 +94,7 @@ function AddProgress() {
     setScreenshot(null);
     setLName("");
     setLContacts("");
+    console.log();
   };
 
   const requestPermission = async () => {
