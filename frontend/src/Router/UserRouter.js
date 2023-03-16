@@ -6,6 +6,7 @@ import {
   getUserDataEndpoint,
 } from "../Helpers/config/axiosUserEndpoins";
 import UserHome from "../Pages/User/Home/UserHome";
+import UserPaymentPage from "../Pages/User/Payment/UserPaymentPage";
 import UserProject from "../Pages/User/Project/UserProject";
 
 function UserRouter() {
@@ -56,6 +57,7 @@ function UserRouter() {
         path="/projects/view/add/progress"
         element={<UserProject type="addProgress" />}
       />
+      <Route path="/payment" element={<UserPaymentPage type="user" />} />
     </Routes>
   );
 }

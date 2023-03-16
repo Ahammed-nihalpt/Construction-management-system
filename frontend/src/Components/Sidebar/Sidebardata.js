@@ -56,7 +56,7 @@ export const userSidebarData = [
   },
   {
     title: "Payment ",
-    link: "/home",
+    link: "/user/payment",
     icon: <PaidSharpIcon />,
   },
   {
