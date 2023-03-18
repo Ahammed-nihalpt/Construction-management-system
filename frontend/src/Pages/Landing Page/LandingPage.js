@@ -3,6 +3,7 @@ import LandingCarousel from "../../Components/Landing Page Components/Carousel/L
 import Features from "../../Components/Landing Page Components/Features/Features";
 import LandingNav from "../../Components/Landing Page Components/Landing Nav/LandingNav";
 import About from "../../Components/Landing Page Components/Landing page content/About/About";
+import LoginSignup from "../../Components/Landing Page Components/LoginSignup/LoginSignup";
 
 function LandingPage() {
   return (
@@ -21,6 +22,7 @@ function LandingPage() {
       <LandingCarousel />
       <About />
       <Features />
+      <LoginSignup />
     </div>
   );
 }

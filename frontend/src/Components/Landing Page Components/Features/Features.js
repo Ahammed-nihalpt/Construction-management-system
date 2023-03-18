@@ -40,7 +40,7 @@ function Features() {
     };
   }, []);
   return (
-    <div className="features" ref={targetRef}>
+    <div className="features">
       <div className="all_fe">
         <div
           className="single_features slide-in-bck-center"
@@ -99,7 +99,9 @@ function Features() {
         </div>
       </div>
       <div className="fe_head">
-        <h1 className={headingEffect ? "text-pop-up-top " : ""}>Features</h1>
+        <h1 className={headingEffect ? "text-pop-up-top " : ""} ref={targetRef}>
+          Features
+        </h1>
       </div>
     </div>
   );

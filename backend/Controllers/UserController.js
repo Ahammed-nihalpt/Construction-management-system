@@ -13,6 +13,7 @@ const ProgressModel = require('../Models/ProgressModel');
 const LabourModel = require('../Models/LabourListModel');
 const UserModel = require('../Models/UserModel');
 const ProjectModel = require('../Models/ProjectModel');
+const PaymentModel = require('../Models/PaymentModel');
 
 const userLogin = async (req, res) => {
   try {
@@ -253,6 +254,25 @@ const getProgressLabourList = async (req, res) => {
   }
 };
 
+const requestPayment = async (req, res) => {
+  try {
+    const { data } = req.body;
+    const Payment = new PaymentModel({
+      company_id: data.cid,
+      amount: data.amount,
+      payment_for: data.for,
+      project_id: data.pid,
+      user_id: data.uid,
+      date: Date.now,
+    });
+
+    await Payment.save();
+    res.send({ success: true, message: 'payment added successfully' });
+  } catch (error) {
+    res.send({ success: false, message: error.message });
+  }
+};
+
 module.exports = {
   userLogin,
   getUserData,
@@ -262,4 +282,5 @@ module.exports = {
   addProgress,
   getAllProgress,
   getProgressLabourList,
+  requestPayment,
 };
