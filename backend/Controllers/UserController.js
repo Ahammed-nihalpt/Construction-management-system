@@ -257,6 +257,7 @@ const getProgressLabourList = async (req, res) => {
 const requestPayment = async (req, res) => {
   try {
     const { data } = req.body;
+    const projectdetails = ProjectModel.findOne({ id: data.pid });
     const Payment = new PaymentModel({
       company_id: data.cid,
       amount: data.amount,

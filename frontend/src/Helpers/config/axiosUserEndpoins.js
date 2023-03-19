@@ -25,3 +25,5 @@ export const getAllProgressEndpoint = (id) =>
 
 export const getLabourListEndpoint = (id, date) =>
   axios.get(`/user/get/labour/${id}/${date}`);
+
+export const addPaymentRequestEndpoint = (value, pid) => axios.post;

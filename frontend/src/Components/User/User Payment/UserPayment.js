@@ -1,20 +1,35 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import { Autocomplete, Box, TextField } from "@mui/material";
+import { getUserProjectsEndpoint } from "../../../Helpers/config/axiosUserEndpoins";
+import { payValidation } from "../../../Helpers/Form Validation/PaymentValidation";
 
 function UserPayment() {
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
-  const users = [{ name: "appu" }, { name: "akhil" }];
+  const [projects, setProjects] = useState("");
   const intialValue = {
-    title: "",
-    progress: "",
-    issue: "",
-    description: "",
+    for: "",
+    pid: "",
+    amount: "",
+  };
+  useEffect(() => {
+    getUserProjectsEndpoint(localStorage.getItem("id")).then((response) => {
+      const projectData = response.data.projects;
+      setProjects(projectData);
+    });
+  }, []);
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    const errors = payValidation(formValues, value);
+    setFormErrors(errors);
   };
   const [formValues, setFormValues] = useState(intialValue);
   const [formErrors, setFormErrors] = useState({});
+  const [value, setValue] = useState();
+
   const handleChange = (event) => {
     const { name, value } = event.target;
     setFormValues({ ...formValues, [name]: value });
@@ -79,17 +94,19 @@ function UserPayment() {
                 <Autocomplete
                   disablePortal
                   id="combo-box-demo"
-                  options={users}
-                  getOptionLabel={(option) => option.name}
+                  options={projects}
+                  getOptionLabel={(option) => option.project_name}
                   sx={{ width: "100%" }}
-                  //   onChange={(e, value) => {
-                  //     setValues(value);
-                  //   }}
+                  onChange={(e, values) => {
+                    setValue(values._id);
+                  }}
                   renderInput={(params) => (
                     <TextField {...params} label="Select project" />
                   )}
                 />
+                <div className="error_div">{formErrors.pid}</div>
               </div>
+
               <div className="col-12 mb-1">
                 <div className="form-floating">
                   <input
@@ -120,7 +137,9 @@ function UserPayment() {
               </div>
             </form>
             <div className="col-12 mt-2 d-flex justify-content-center">
-              <button className="pregress_btn ">Submit</button>
+              <button className="pregress_btn" onClick={handleSubmit}>
+                Submit
+              </button>
             </div>
           </div>
         </Box>

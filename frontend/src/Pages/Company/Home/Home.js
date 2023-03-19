@@ -21,6 +21,7 @@ function Home() {
         <div className="top_nav">
           <Topnav />
         </div>
+        <div></div>
       </div>
     </div>
   );
