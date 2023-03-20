@@ -26,4 +26,11 @@ export const getAllProgressEndpoint = (id) =>
 export const getLabourListEndpoint = (id, date) =>
   axios.get(`/user/get/labour/${id}/${date}`);
 
-export const addPaymentRequestEndpoint = (value, pid) => axios.post;
+export const addPaymentRequestEndpoint = (value, pid, uid) =>
+  axios.post("/user/payment/request", { value, pid, uid });
+
+export const getUserPaymentHistoryEndpoint = (uid) =>
+  axios.get(`/user/payment/history/${uid}`);
+
+export const userCancelPaymentEndpoint = (payId) =>
+  axios.post("/user/cancel/payment", { payId });

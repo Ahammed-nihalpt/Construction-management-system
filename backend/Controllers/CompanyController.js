@@ -3,7 +3,9 @@
 /* eslint-disable no-console */
 
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const bcrypt = require('bcrypt');
+const crypto = require('crypto');
 const companyModel = require('../Models/CompanyModel');
 const otpModel = require('../Models/OtpModel');
 const sendOtpMiddle = require('../Middleware/opt');
@@ -11,6 +13,8 @@ const ProjectModel = require('../Models/ProjectModel');
 const ScheduleModel = require('../Models/ScheduleModel');
 const DesignationModel = require('../Models/DesignationModel');
 const UserModel = require('../Models/UserModel');
+const PaymentModel = require('../Models/PaymentModel');
+const instance = require('../Middleware/Razorpay');
 
 const randomID = () => {
   const random = Math.floor(Math.random() * 9000 + 1000);
@@ -587,6 +591,105 @@ const companyEditImage = async (req, res) => {
   }
 };
 
+const getAllPayment = async (req, res) => {
+  try {
+    const { companyId } = req.params;
+    const objectId = mongoose.Types.ObjectId(companyId);
+    const payments = await PaymentModel.aggregate([
+      { $match: { company_id: objectId } },
+      {
+        $lookup: {
+          from: 'projects',
+          localField: 'project_id',
+          foreignField: '_id',
+          as: 'project',
+        },
+      },
+      {
+        $lookup: {
+          from: 'users',
+          let: { userId: '$user_id' },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $in: ['$$userId', '$users._id'] },
+              },
+            },
+            {
+              $project: {
+                matched_user: {
+                  $arrayElemAt: [
+                    '$users',
+                    {
+                      $indexOfArray: ['$users._id', '$$userId'],
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+          as: 'user_info',
+        },
+      },
+    ]);
+    res.send({ success: true, payments });
+  } catch (error) {
+    res.send({ success: false, message: 'Something went wrong!!!' });
+  }
+};
+
+const paymentStatus = async (req, res) => {
+  try {
+    const { payId, status } = req.body;
+    await PaymentModel.findByIdAndUpdate({ _id: payId }, { status });
+    res.send({ success: true, message: 'Payment status changed' });
+  } catch (error) {
+    res.send({ success: false, message: error.message });
+  }
+};
+
+const razorPayment = async (req, res) => {
+  try {
+    const { amount, id } = req.body;
+    const options = {
+      amount: Number(amount * 100),
+      currency: 'INR',
+      // eslint-disable-next-line prefer-template
+      receipt: '' + id,
+    };
+    instance.orders.create(options, (err, order) => {
+      if (err) {
+        res.status(400).send({
+          success: false,
+          err,
+        });
+      } else {
+        res.send({ success: true, order });
+      }
+    });
+  } catch (error) {
+    res.status(400).send({
+      success: false,
+      message: error.message,
+    });
+  }
+};
+
+const razorPaymentverification = async (req, res) => {
+  let hmac = crypto.createHmac('sha256', process.env.RAZOR_KEY_SECRET);
+  hmac.update(
+    `${req.body.payment.razorpay_order_id}|${req.body.payment.razorpay_payment_id}`
+  );
+  hmac = hmac.digest('hex');
+  if (hmac === req.body.payment.razorpay_signature) {
+    await PaymentModel.findByIdAndUpdate(
+      { _id: req.body.id },
+      { status: 'Paid' }
+    );
+  }
+  res.send({ success: true });
+};
+
 module.exports = {
   Registration,
   verifyOTP,
@@ -612,4 +715,9 @@ module.exports = {
   addUser,
   getUsers,
   companyEditImage,
+  // Payment
+  getAllPayment,
+  paymentStatus,
+  razorPayment,
+  razorPaymentverification,
 };

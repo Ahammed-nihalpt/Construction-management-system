@@ -46,4 +46,21 @@ router.get('/designation/:id', tokenMiddleware, controller.getDesignation);
 router.post('/user/add', tokenMiddleware, controller.addUser);
 router.get('/users/:id', tokenMiddleware, controller.getUsers);
 
+router.get(
+  '/all/payments/:companyId',
+  tokenMiddleware,
+  controller.getAllPayment
+);
+router.post(
+  '/change/payment/status',
+  tokenMiddleware,
+  controller.paymentStatus
+);
+router.post('/razor/payment', tokenMiddleware, controller.razorPayment);
+router.post(
+  '/razor/verify/payment',
+  tokenMiddleware,
+  controller.razorPaymentverification
+);
+
 module.exports = router;

@@ -13,3 +13,7 @@
 .side_nav {
   height: 100vh;
 }
+
+.pregress_btn:disabled {
+  background-color: #364050;
+}

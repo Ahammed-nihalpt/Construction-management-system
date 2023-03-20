@@ -12,5 +12,8 @@ router.get('/get/single/project/:id', controller.getSingleProject);
 router.post('/add/progress', controller.addProgress);
 router.get('/get/all/progress/:id', controller.getAllProgress);
 router.get('/get/labour/:id/:date', controller.getProgressLabourList);
+router.post('/payment/request', controller.requestPayment);
+router.get('/payment/history/:uid', controller.getPaymentHistory);
+router.post('/cancel/payment', controller.cancelPayment);
 
 module.exports = router;

@@ -5,6 +5,7 @@ import CompanyPassword from "../Components/Company/Company password/CompanyPassw
 import CompanyRegistration from "../Components/Company/Company registration/CompanyRegistration";
 import CompanyLogin from "../Components/Company/CompanyLogin/CompanyLogin";
 import Home from "../Pages/Company/Home/Home";
+import CompanyPayment from "../Pages/Company/Payment/CompanyPayment";
 import Project from "../Pages/Company/Projects/Project";
 import User from "../Pages/Company/Users/User";
 
@@ -119,6 +120,10 @@ function CompanyRouter() {
             <Navigate to="/company/login" />
           )
         }
+      />
+      <Route
+        path="/payment"
+        element={token ? <CompanyPayment /> : <Navigate to="/company/login" />}
       />
     </Routes>
   );

@@ -1,14 +1,23 @@
 import React, { useEffect, useState } from "react";
 import Modal from "@mui/material/Modal";
 import { Autocomplete, Box, TextField } from "@mui/material";
-import { getUserProjectsEndpoint } from "../../../Helpers/config/axiosUserEndpoins";
+import {
+  addPaymentRequestEndpoint,
+  getUserPaymentHistoryEndpoint,
+  getUserProjectsEndpoint,
+  userCancelPaymentEndpoint,
+} from "../../../Helpers/config/axiosUserEndpoins";
+import { toast } from "react-toastify";
 import { payValidation } from "../../../Helpers/Form Validation/PaymentValidation";
+import Swal from "sweetalert2";
 
 function UserPayment() {
+  const [payments, setPayments] = useState([]);
   const [open, setOpen] = useState(false);
   const handleOpen = () => setOpen(true);
   const handleClose = () => setOpen(false);
   const [projects, setProjects] = useState("");
+  const [cancel, setCancel] = useState(true);
   const intialValue = {
     for: "",
     pid: "",
@@ -19,12 +28,54 @@ function UserPayment() {
       const projectData = response.data.projects;
       setProjects(projectData);
     });
-  }, []);
+    getUserPaymentHistoryEndpoint(localStorage.getItem("id")).then(
+      (response) => {
+        if (response.data.success) {
+          setPayments(response.data.payments);
+        }
+      }
+    );
+  }, [open, cancel]);
 
   const handleSubmit = (e) => {
     e.preventDefault();
     const errors = payValidation(formValues, value);
     setFormErrors(errors);
+    if (Object.keys(errors).length <= 0) {
+      addPaymentRequestEndpoint(
+        formValues,
+        value,
+        localStorage.getItem("id")
+      ).then((response) => {
+        if (response.data.success) {
+          handleClose();
+          toast.success("Payment requested successfully");
+        }
+      });
+    }
+  };
+
+  const onCancelClick = (payId) => {
+    Swal.fire({
+      title: "Are sure you want to cancel the request?",
+      showDenyButton: true,
+      showCancelButton: true,
+      confirmButtonText: "yes",
+      // denyButtonText: `Don't save`,
+    }).then((result) => {
+      if (result.isConfirmed) {
+        userCancelPaymentEndpoint(payId).then((response) => {
+          if (response.data.success) {
+            toast.success("Payment requested cancelled");
+            if (cancel) {
+              setCancel(false);
+            } else {
+              setCancel(true);
+            }
+          }
+        });
+      }
+    });
   };
   const [formValues, setFormValues] = useState(intialValue);
   const [formErrors, setFormErrors] = useState({});
@@ -65,16 +116,40 @@ function UserPayment() {
               </tr>
             </thead>
             <tbody>
-              <tr className="text-center">
-                <th scope="row">1</th>
-                <td>sadf</td>
-                <td>asdf</td>
-                <td>asdfas</td>
-                <td>asdfas</td>
-                <td className="opstly">
-                  <button className="pregress_btn">Cancel</button>
-                </td>
-              </tr>
+              {payments &&
+                payments.map((value) => (
+                  <tr className="text-center">
+                    <th scope="row">{`${new Date(value.date).getDate()}-${
+                      new Date(value.date).getMonth() + 1
+                    }-${new Date(value.date).getFullYear()}`}</th>
+                    <td>{value.amount}</td>
+                    <td>{value.projects[0].project_name}</td>
+                    <td>{value.payment_for}</td>
+                    <td>{value.status}</td>
+                    <td className="opstly">
+                      {value.status === "Pending" ? (
+                        <button
+                          className="pregress_btn"
+                          onClick={() => {
+                            onCancelClick(value._id);
+                          }}
+                        >
+                          Cancel
+                        </button>
+                      ) : value.status === "Cancelled" ? (
+                        "Request cancelled"
+                      ) : value.status === "Rejected" ? (
+                        "Payment rejected"
+                      ) : value.status === "Confirmed" ? (
+                        "Payment confirmed"
+                      ) : value.status === "Paid" ? (
+                        "Payment made"
+                      ) : (
+                        ""
+                      )}
+                    </td>
+                  </tr>
+                ))}
             </tbody>
           </table>
         </div>

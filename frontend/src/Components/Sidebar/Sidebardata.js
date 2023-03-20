@@ -28,7 +28,7 @@ export const comapnySidebarData = [
   },
   {
     title: "Payment ",
-    link: "/home",
+    link: "/company/payment",
     icon: <PaidSharpIcon />,
   },
   {

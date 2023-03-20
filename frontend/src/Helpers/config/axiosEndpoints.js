@@ -64,3 +64,19 @@ export const userLoginEndPoint = (email, cmpid, password) =>
 
 export const editCompanyImg = (formdata, id) =>
   axios.post(`/company/edit/pofile/${id}`, formdata, imgConfig);
+
+export const getAllPaymentsEndpoint = (id) =>
+  axios.get(`/company/all/payments/${id}`, config);
+
+export const changePaymentStatus = (id, value) =>
+  axios.post(
+    "/company/change/payment/status",
+    { payId: id, status: value },
+    config
+  );
+
+export const onlinePayEndpoint = (id, amount) =>
+  axios.post("/company/razor/payment", { id, amount }, config);
+
+export const verifyPaymentEndpoint = (id, payment) =>
+  axios.post("/company/razor/verify/payment", { id, payment }, config);

@@ -10,6 +10,7 @@ const PaymentSchema = new Schema({
   project_id: { type: ObjectId, required: true },
   amount: { type: Number, required: true },
   payment_for: { type: String, required: true },
+  status: { type: String, required: true, default: 'Pending' },
   date: Date,
 });
 

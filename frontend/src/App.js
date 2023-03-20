@@ -9,12 +9,14 @@ import AdminLogin from "./Components/Admin/Admin Login/AdminLogin";
 import AdminRouter from "./Router/AdminRouter";
 import PermissionDenied from "./Components/Permission Denied/PermissionDenied";
 import Chat from "./Pages/Chat Page/Chat";
+import { ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const token = localStorage.getItem("token");
-  console.log(token);
   return (
     <div className="App">
+      <ToastContainer />
       <BrowserRouter>
         <Routes>
           <Route path="/" exact element={<LandingPage />} />
@@ -34,6 +36,7 @@ function App() {
           <Route path="/403" element={<PermissionDenied />} />
         </Routes>
       </BrowserRouter>
+      {/* </ToastContainer> */}
     </div>
   );
 }

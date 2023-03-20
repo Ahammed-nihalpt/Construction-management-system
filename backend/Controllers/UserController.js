@@ -6,6 +6,7 @@
 /* eslint-disable no-console */
 
 const jwt = require('jsonwebtoken');
+const mongoose = require('mongoose');
 const base64Img = require('base64-img');
 const DesignationModel = require('../Models/DesignationModel');
 const companyModel = require('../Models/CompanyModel');
@@ -256,19 +257,59 @@ const getProgressLabourList = async (req, res) => {
 
 const requestPayment = async (req, res) => {
   try {
-    const { data } = req.body;
-    const projectdetails = ProjectModel.findOne({ id: data.pid });
-    const Payment = new PaymentModel({
-      company_id: data.cid,
-      amount: data.amount,
-      payment_for: data.for,
-      project_id: data.pid,
-      user_id: data.uid,
-      date: Date.now,
-    });
+    const { value, pid, uid } = req.body;
+    const projectdetails = await ProjectModel.findOne({ id: pid });
+    if (projectdetails.access.includes(uid)) {
+      const cid = projectdetails.company_id;
+      const Payment = new PaymentModel({
+        company_id: cid,
+        amount: value.amount,
+        payment_for: value.for,
+        project_id: pid,
+        user_id: uid,
+        date: Date(),
+      });
+      await Payment.save();
+      res.send({ success: true, message: 'payment added successfully' });
+    } else {
+      throw new Error('Dont have access to this project');
+    }
+  } catch (error) {
+    res.send({ success: false, message: error.message });
+  }
+};
 
-    await Payment.save();
-    res.send({ success: true, message: 'payment added successfully' });
+const getPaymentHistory = async (req, res) => {
+  try {
+    const { uid } = req.params;
+    const objectId = mongoose.Types.ObjectId(uid);
+    const payments = await PaymentModel.aggregate([
+      {
+        $match: { user_id: objectId },
+      },
+      {
+        $lookup: {
+          from: 'projects',
+          localField: 'project_id',
+          foreignField: '_id',
+          as: 'projects',
+        },
+      },
+    ]);
+    res.send({ success: true, payments });
+  } catch (error) {
+    res.send({ success: false, message: error.message });
+  }
+};
+
+const cancelPayment = async (req, res) => {
+  try {
+    const { payId } = req.body;
+    await PaymentModel.findByIdAndUpdate(
+      { _id: payId },
+      { status: 'Cancelled' }
+    );
+    res.send({ success: true, message: 'Payment request cancelled' });
   } catch (error) {
     res.send({ success: false, message: error.message });
   }
@@ -284,4 +325,6 @@ module.exports = {
   getAllProgress,
   getProgressLabourList,
   requestPayment,
+  cancelPayment,
+  getPaymentHistory,
 };
