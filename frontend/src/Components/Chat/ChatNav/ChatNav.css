@@ -14,16 +14,15 @@
 }
 
 .chat_nav_head h2 {
-  color: #555555bc;
+  color: #1b2433;
 }
 
 .chat_nav_head button:hover {
-  color: rgba(2, 4, 5, 0.5);
-  background-color: #fff;
+  background-color: #1b2433;
 }
 
 .chat_nav_head button {
-  background-color: rgba(2, 4, 5, 0.5);
+  background-color: #1b2433;
   color: #fff;
   border: none;
   border-radius: 5px;

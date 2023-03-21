@@ -18,7 +18,6 @@ function SingleUserView({ action }) {
   const value = useSelector((state) => state.data);
   useEffect(() => {
     if (state.id) {
-      console.log(state.id + "%%%%%");
       getUserEndPoint(localStorage.getItem("id")).then((response) => {
         const data = response.data.users.users;
         const filter = data.find((obj) => obj._id === state.id);

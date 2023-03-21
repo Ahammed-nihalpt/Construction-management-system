@@ -1,3 +1,4 @@
+/* eslint-disable import/order */
 /* eslint-disable linebreak-style */
 /* eslint-disable no-console */
 
@@ -31,4 +32,31 @@ app.use('/company', companyRouter);
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
 
-app.listen(port, () => console.log(`App now listening on port ${port}`));
+// app.listen(port, () => console.log(`App now listening on port ${port}`));
+
+// eslint-disable-next-line import/no-extraneous-dependencies
+const socketio = require('socket.io');
+const { createChat } = require('./Controllers/ChatController');
+
+const http = require('http').createServer(app);
+
+const io = socketio(http, {
+  cors: {
+    origin: 'http://localhost:3000',
+    methods: ['GET', 'POST'],
+  },
+});
+
+io.on('connection', (socket) => {
+  socket.on('disconnect', () => {});
+
+  // Step 5: Listen for events
+  socket.on('chat message', (msg, sid, rid) => {
+    console.log(`Message: ${msg}-${sid}-${rid}`);
+    createChat(sid, rid, msg);
+    // Step 4: Emit events
+    io.emit('chat message', msg);
+  });
+});
+
+http.listen(port, () => console.log(`App now listening on port ${port}`));
