@@ -34,3 +34,12 @@ export const getUserPaymentHistoryEndpoint = (uid) =>
 
 export const userCancelPaymentEndpoint = (payId) =>
   axios.post("/user/cancel/payment", { payId });
+
+export const getAllChatUsers = (companyId, userId) =>
+  axios.post("/chat/getuser", { companyId, userId });
+
+export const getChatDesignation = (id) =>
+  axios.get(`/chat/desiganationd/${id}`);
+
+export const getChatHistoryUser = (sender, receiver) =>
+  axios.post("/chat/history", { sender, receiver });

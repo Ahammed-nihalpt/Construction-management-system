@@ -66,3 +66,11 @@
   padding: 20px;
   border-radius: 30px;
 }
+
+.ms_snd_input input:disabled {
+  display: none;
+}
+
+.ms_snd_input button:disabled {
+  display: none;
+}

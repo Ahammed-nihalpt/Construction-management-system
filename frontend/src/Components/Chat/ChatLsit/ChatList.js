@@ -5,20 +5,44 @@ import {
   getDesignationEndPoint,
   getUserEndPoint,
 } from "../../../Helpers/config/axiosEndpoints";
+import {
+  getAllChatUsers,
+  getChatDesignation,
+  getPermissionEndpoint,
+} from "../../../Helpers/config/axiosUserEndpoins";
 
 function ChatList(props) {
   const [userData, setUserData] = useState([]);
   const [desgination, setDesgination] = useState([]);
   useEffect(() => {
-    getUserEndPoint(localStorage.getItem("id")).then((response) => {
-      const data = response.data.users.users;
-      console.log(data);
-      getDesignationEndPoint(localStorage.getItem("id")).then((res) => {
-        const de = res.data.designation;
-        setDesgination(de);
-        setUserData(data);
+    if (props.account === "company") {
+      getUserEndPoint(localStorage.getItem("id")).then((response) => {
+        const data = response.data.users.users;
+        console.log(data);
+        getDesignationEndPoint(localStorage.getItem("id")).then((res) => {
+          const de = res.data.designation;
+          setDesgination(de);
+          setUserData(data);
+        });
       });
-    });
+    } else if (props.account === "user") {
+      getAllChatUsers(
+        localStorage.getItem("cid"),
+        localStorage.getItem("id")
+      ).then((res) => {
+        if (res.data.success) {
+          const data = res.data.data[0].users;
+
+          getChatDesignation(localStorage.getItem("cid")).then((resp) => {
+            if (resp.data.success) {
+              const de = resp.data.designation;
+              setDesgination(de);
+              setUserData(data);
+            }
+          });
+        }
+      });
+    }
   }, []);
 
   const handleOnUserClick = (id) => {
@@ -40,7 +64,9 @@ function ChatList(props) {
             <div
               className="single_chat col-12"
               key={value._id}
-              onClick={() => handleOnUserClick(value._id)}
+              onClick={() => {
+                handleOnUserClick(value._id);
+              }}
             >
               <div>
                 <img

@@ -6,29 +6,65 @@ import {
   getDesignationEndPoint,
   getUserEndPoint,
 } from "../../../Helpers/config/axiosEndpoints";
+import {
+  getChatDesignation,
+  getChatHistoryUser,
+  getUserDataEndpoint,
+} from "../../../Helpers/config/axiosUserEndpoins";
+import SingleMessage from "../Single Message/SingleMessage";
 
-function MessageSide({ id }) {
-  const [messages, setMessages] = useState([]);
-  const [previous, setPrevious] = useState();
+function MessageSide({ id, account }) {
+  const [sendMsg, setSnedMsg] = useState();
   const [inputValue, setInputValue] = useState("");
   const socket = io("http://localhost:9000");
   const [user, setUser] = useState({});
   const [Designation, setDesignation] = useState();
   useEffect(() => {
-    getUserEndPoint(localStorage.getItem("id")).then((response) => {
-      const data = response.data.users.users;
-      const filter = data.find((obj) => obj._id === id);
-      setUser(filter);
-      getDesignationEndPoint(localStorage.getItem("id")).then((response) => {
-        if (response.data.success) {
-          const doc = response.data.designation;
-          const filterd = doc.find((obj) => obj._id === filter.designation_id);
-          setDesignation(filterd);
+    if (id) {
+      getChatHistoryUser(localStorage.getItem("id"), id).then((respon) => {
+        const smsg = respon.data.sndMessage;
+        const rmsg = respon.data.receiveMessage;
+        const msg = [...smsg, ...rmsg];
+        console.log(msg);
+        setSnedMsg([...smsg, ...rmsg]);
+      });
+    }
+
+    if (account === "company") {
+      getUserEndPoint(localStorage.getItem("id")).then((response) => {
+        const data = response.data.users.users;
+        const filter = data.find((obj) => obj._id === id);
+        setUser(filter);
+        getDesignationEndPoint(localStorage.getItem("id")).then((response) => {
+          if (response.data.success) {
+            const doc = response.data.designation;
+            const filterd = doc.find(
+              (obj) => obj._id === filter.designation_id
+            );
+            setDesignation(filterd);
+          }
+        });
+      });
+    } else if (account === "user") {
+      getUserDataEndpoint(id).then((res) => {
+        if (res.data.success) {
+          const filter = res.data.userData;
+          setUser(filter);
+          getChatDesignation(localStorage.getItem("cid")).then((resp) => {
+            if (resp.data.success) {
+              const doc = resp.data.designation;
+              const filterd = doc.find(
+                (obj) => obj._id === filter.designation_id
+              );
+              setDesignation(filterd);
+            }
+          });
         }
       });
-    });
+    }
+
     socket.on("chat message", (msg) => {
-      setMessages((prevMessages) => [...prevMessages, msg]);
+      setSnedMsg((prevMessages) => [...prevMessages, msg]);
     });
     return () => {
       socket.disconnect();
@@ -38,7 +74,7 @@ function MessageSide({ id }) {
   const handleFormSubmit = (event) => {
     event.preventDefault();
     if (inputValue.trim() === "") return;
-    // Emit a new message
+    setSnedMsg((prevMessages) => [...prevMessages, inputValue]);
     socket.emit("chat message", inputValue, id, localStorage.getItem("id"));
     setInputValue("");
   };
@@ -50,7 +86,7 @@ function MessageSide({ id }) {
   return (
     <div className="messageside">
       <div className="ms_head">
-        {user && (
+        {id && user && (
           <img
             src={`http://localhost:9000/image/user/${user.image}.jpg`}
             alt=""
@@ -66,25 +102,21 @@ function MessageSide({ id }) {
       <div className="ms_body">
         <div class="chat__message chat__message-own">
           <div class="date"></div>
-          <div>
-            <ul>
-              {messages.map((msg, index) => (
-                <li key={index}>{msg}</li>
-              ))}
-            </ul>
-          </div>
+          {id && <SingleMessage messages={sendMsg} currentUserId={id} />}
+          {!id && <h4>Select a user</h4>}
         </div>
       </div>
       <div className="ms_foot">
         <div className="ms_snd_input">
           <form className="ms_snd_input" onSubmit={handleFormSubmit}>
             <input
+              disabled={id ? false : true}
               type="text"
               placeholder="Type a message ....."
               value={inputValue}
               onChange={handleInputChange}
             />
-            <button type="submit">
+            <button type="submit" disabled={id ? false : true}>
               <SendIcon />
             </button>
           </form>

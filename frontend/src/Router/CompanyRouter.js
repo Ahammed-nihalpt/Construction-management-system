@@ -4,6 +4,7 @@ import Opt from "../Components/Company/Company OTP/opt";
 import CompanyPassword from "../Components/Company/Company password/CompanyPassword";
 import CompanyRegistration from "../Components/Company/Company registration/CompanyRegistration";
 import CompanyLogin from "../Components/Company/CompanyLogin/CompanyLogin";
+import Chat from "../Pages/Chat Page/Chat";
 import Home from "../Pages/Company/Home/Home";
 import CompanyPayment from "../Pages/Company/Payment/CompanyPayment";
 import Project from "../Pages/Company/Projects/Project";
@@ -124,6 +125,12 @@ function CompanyRouter() {
       <Route
         path="/payment"
         element={token ? <CompanyPayment /> : <Navigate to="/company/login" />}
+      />
+      <Route
+        path="/chat"
+        element={
+          token ? <Chat account="company" /> : <Navigate to="/company/login" />
+        }
       />
     </Routes>
   );

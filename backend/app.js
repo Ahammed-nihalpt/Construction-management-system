@@ -27,10 +27,12 @@ const port = 9000;
 const companyRouter = require('./Routes/CompnayRouter');
 const userRouter = require('./Routes/UserRouter');
 const adminRouter = require('./Routes/AdminRouter');
+const chatRouter = require('./Routes/ChatRouter');
 
 app.use('/company', companyRouter);
 app.use('/user', userRouter);
 app.use('/admin', adminRouter);
+app.use('/chat', chatRouter);
 
 // app.listen(port, () => console.log(`App now listening on port ${port}`));
 
@@ -50,12 +52,13 @@ const io = socketio(http, {
 io.on('connection', (socket) => {
   socket.on('disconnect', () => {});
 
-  // Step 5: Listen for events
-  socket.on('chat message', (msg, sid, rid) => {
+  socket.on('chat message', (msg, rid, sid) => {
     console.log(`Message: ${msg}-${sid}-${rid}`);
     createChat(sid, rid, msg);
-    // Step 4: Emit events
-    io.emit('chat message', msg);
+    const receiverRoom = io.sockets.adapter.rooms.get(rid);
+    if (receiverRoom) {
+      io.to(receiverRoom).emit('message');
+    }
   });
 });
 

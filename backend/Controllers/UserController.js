@@ -42,6 +42,7 @@ const userLogin = async (req, res) => {
           message: 'user found',
           token,
           id: user[0]._id,
+          cid: userData.company_id,
         });
       } else {
         throw new Error('User not found');
@@ -63,7 +64,7 @@ const getSingleDesignation = async (req, res) => {
     }
     res.send({ success: true, doc });
   } catch (error) {
-    res.send({ success: true, message: error.message });
+    res.send({ success: false, message: error.message });
   }
 };
 

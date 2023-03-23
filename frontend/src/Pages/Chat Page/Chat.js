@@ -4,7 +4,7 @@ import ChatNav from "../../Components/Chat/ChatNav/ChatNav";
 import MessageSide from "../../Components/Chat/Message/MessageSide";
 import "./Chat.css";
 
-function Chat() {
+function Chat({ account }) {
   const [data, setData] = useState();
   const handleDataChange = (id) => {
     setData(id);
@@ -23,10 +23,10 @@ function Chat() {
         </div>
         <div className="row" style={{ height: "calc(100% - 50px)" }}>
           <div className="col-4 col-md-3" style={{ position: "relative" }}>
-            <ChatList onClickUpdate={handleDataChange} />
+            <ChatList onClickUpdate={handleDataChange} account={account} />
           </div>
           <div className="col-8 col-md-9">
-            <MessageSide id={data} />
+            <MessageSide id={data} account={account} />
           </div>
         </div>
       </div>

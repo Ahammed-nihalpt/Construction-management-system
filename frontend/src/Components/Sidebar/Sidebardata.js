@@ -23,7 +23,7 @@ export const comapnySidebarData = [
   },
   {
     title: "Messages",
-    link: "/chat",
+    link: "/company/chat",
     icon: <MessageSharpIcon />,
   },
   {
@@ -51,7 +51,7 @@ export const userSidebarData = [
   },
   {
     title: "Messages",
-    link: "/chat",
+    link: "/user/chat",
     icon: <MessageSharpIcon />,
   },
   {

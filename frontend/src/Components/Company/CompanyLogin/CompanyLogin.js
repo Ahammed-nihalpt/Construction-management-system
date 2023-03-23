@@ -35,7 +35,6 @@ function CompanyLogin() {
           if (response.data.success) {
             localStorage.setItem("token", response.data.token);
             localStorage.setItem("id", response.data.id);
-            localStorage.setItem("type", "company");
             window.location = "/company/home";
             // navigate("/company/home");
           } else {

@@ -7,11 +7,12 @@ const chatSchema = new Schema(
   {
     sender: { type: mongoose.Schema.Types.ObjectId, required: true },
     receiver: { type: mongoose.Schema.Types.ObjectId, required: true },
+    unreadMessages: { type: Number, required: true },
     message: [
       {
         content: { type: String, required: true },
         read: { type: String, required: true, default: false },
-        date: { type: String, required: true, default: Date.now },
+        date: { type: Date, required: true, default: Date.now },
       },
     ],
   },

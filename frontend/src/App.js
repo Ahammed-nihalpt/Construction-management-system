@@ -8,7 +8,6 @@ import UserLogin from "./Components/User/User Login/UserLogin";
 import AdminLogin from "./Components/Admin/Admin Login/AdminLogin";
 import AdminRouter from "./Router/AdminRouter";
 import PermissionDenied from "./Components/Permission Denied/PermissionDenied";
-import Chat from "./Pages/Chat Page/Chat";
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
@@ -32,11 +31,9 @@ function App() {
             path="/admin/*"
             element={token ? <AdminRouter /> : <Navigate to="/" />}
           />
-          <Route path="/chat" element={<Chat />} />
           <Route path="/403" element={<PermissionDenied />} />
         </Routes>
       </BrowserRouter>
-      {/* </ToastContainer> */}
     </div>
   );
 }
