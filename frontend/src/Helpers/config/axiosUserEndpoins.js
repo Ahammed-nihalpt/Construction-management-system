@@ -43,3 +43,6 @@ export const getChatDesignation = (id) =>
 
 export const getChatHistoryUser = (sender, receiver) =>
   axios.post("/chat/history", { sender, receiver });
+
+export const clearUnreadUser = (sender, receiver) =>
+  axios.post("/chat/clear/unread", { sender, receiver });

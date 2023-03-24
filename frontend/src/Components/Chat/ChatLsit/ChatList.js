@@ -9,16 +9,17 @@ import {
   getAllChatUsers,
   getChatDesignation,
   getPermissionEndpoint,
+  clearUnreadUser,
 } from "../../../Helpers/config/axiosUserEndpoins";
 
 function ChatList(props) {
   const [userData, setUserData] = useState([]);
   const [desgination, setDesgination] = useState([]);
+  const [unread, setUnread] = useState([]);
   useEffect(() => {
     if (props.account === "company") {
       getUserEndPoint(localStorage.getItem("id")).then((response) => {
         const data = response.data.users.users;
-        console.log(data);
         getDesignationEndPoint(localStorage.getItem("id")).then((res) => {
           const de = res.data.designation;
           setDesgination(de);
@@ -32,12 +33,13 @@ function ChatList(props) {
       ).then((res) => {
         if (res.data.success) {
           const data = res.data.data[0].users;
-
+          const count = res.data.unread;
           getChatDesignation(localStorage.getItem("cid")).then((resp) => {
             if (resp.data.success) {
               const de = resp.data.designation;
               setDesgination(de);
               setUserData(data);
+              setUnread(count);
             }
           });
         }
@@ -46,6 +48,7 @@ function ChatList(props) {
   }, []);
 
   const handleOnUserClick = (id) => {
+    clearUnreadUser(id, localStorage.getItem("id"));
     props.onClickUpdate(id);
   };
 
@@ -81,6 +84,15 @@ function ChatList(props) {
                     {des._id === value.designation_id ? des.designation : ""}
                   </label>
                 ))}
+              </div>
+              <div>
+                {unread.map((read) =>
+                  read.sender === value._id && read.unreadMessages !== 0 ? (
+                    <label>{read.unreadMessages}</label>
+                  ) : (
+                    "asdf"
+                  )
+                )}
               </div>
             </div>
           ))}

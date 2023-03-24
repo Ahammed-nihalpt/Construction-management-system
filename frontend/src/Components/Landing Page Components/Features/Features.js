@@ -55,13 +55,81 @@ function Features() {
               className={featureDis === "one" ? "less_bri kenburns-top" : ""}
               alt=""
             />
-            Project Scheduling
+
+            <label className={featureDis === "one" ? "im_head_opa" : "im_head"}>
+              Project Scheduling
+            </label>
             {featureDis === "one" && (
-              <div className="fe_details slide-in-bottom">asdf</div>
+              <div className="fe_details slide-in-bottom">
+                Project Scheduling <br /> Scheduling is a critical aspect of
+                construction project management, and a good scheduling feature
+                can help users to plan, organize, and track their projects
+                effectively.We offer a simple method for scheduling your
+                project, ensuring its timely completion.
+              </div>
             )}
           </div>
         </div>
         <div
+          className="single_features slide-in-bck-center"
+          onMouseEnter={() => {
+            featrueDetails("three");
+          }}
+          onMouseLeave={onFeatureMouseLeave}
+        >
+          <div className="feimage">
+            <img
+              src="http://localhost:9000/image/feature/fe2.png"
+              className={featureDis === "three" ? "less_bri kenburns-top" : ""}
+              alt=""
+            />
+            <label
+              className={featureDis === "three" ? "im_head_opa" : "im_head"}
+            >
+              Reporting & Analytics
+            </label>
+            {featureDis === "three" && (
+              <div className="fe_details slide-in-bottom">
+                Reporting & Analytics <br />
+                Reporting and analytics are crucial for construction project
+                management, and a good reporting and analytics feature can
+                provide users with valuable insights into their projects'
+                progress, performance, and risks. We offer an automated report
+                on each of your projects.
+              </div>
+            )}
+          </div>
+        </div>
+        <div
+          className="single_features slide-in-bck-center"
+          onMouseEnter={() => {
+            featrueDetails("two");
+          }}
+          onMouseLeave={onFeatureMouseLeave}
+        >
+          <div className="feimage">
+            <img
+              src="http://localhost:9000/image/feature/fe3.jpg"
+              className={featureDis === "two" ? "less_bri kenburns-top" : ""}
+              alt=""
+            />
+            <label className={featureDis === "two" ? "im_head_opa" : "im_head"}>
+              Project Control
+            </label>
+
+            {featureDis === "two" && (
+              <div className="fe_details slide-in-bottom">
+                Project Control <br />
+                It is critical to understand what is happening in the project at
+                each step because a mistake can result in significant time,
+                money, and other losses in the project, so we are providing a
+                solution for this issue, by using our site Company can see what
+                is happening in all the project at a single point.
+              </div>
+            )}
+          </div>
+        </div>
+        {/* <div
           className="single_features slide-in-bck-center"
           onMouseEnter={() => {
             featrueDetails("two");
@@ -93,10 +161,10 @@ function Features() {
               alt=""
             />
             {featureDis === "three" && (
-              <div className="fe_details slide-in-bottom">asdf</div>
+              <div className="fe_details slide-in-bottom">asdfsdaf</div>
             )}
           </div>
-        </div>
+        </div> */}
       </div>
       <div className="fe_head">
         <h1 className={headingEffect ? "text-pop-up-top " : ""} ref={targetRef}>

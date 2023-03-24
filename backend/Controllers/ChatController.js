@@ -10,10 +10,7 @@ const DesignationModel = require('../Models/DesignationModel');
 
 const createChat = async (sender, receiver, content) => {
   try {
-    console.log(sender);
     const Chk = await ChatModel.findOne({ sender, receiver });
-    // const sender = mongoose.Types.ObjectId(senderId);
-    // const receiver = mongoose.Types.ObjectId(receiverId);
     if (Chk) {
       await ChatModel.findOneAndUpdate(
         { sender, receiver },
@@ -25,7 +22,6 @@ const createChat = async (sender, receiver, content) => {
         { $push: { message: { content } } }
       );
     } else {
-      console.log('sadfa');
       // if sender is not there
       const newChat = new ChatModel({
         sender,
@@ -97,7 +93,20 @@ const getUsersAndUreadedChat = async (req, res) => {
         },
       },
     ]);
-    res.send({ success: true, data: result });
+
+    const unread = await ChatModel.aggregate([
+      { $match: { receiver: objectId } },
+      {
+        $project: {
+          _id: 0,
+          sender: 1,
+          unreadMessages: 1,
+        },
+      },
+    ]);
+
+    console.log(unread);
+    res.send({ success: true, data: result, unread });
   } catch (error) {
     res.send({ success: true, message: error.message });
   }
@@ -134,9 +143,22 @@ const getPreviousMessage = async (req, res) => {
   }
 };
 
+const clearUnread = async (req, res) => {
+  try {
+    const { sender, receiver } = req.body;
+    await ChatModel.findOneAndUpdate(
+      { sender, receiver },
+      { unreadMessages: 0 }
+    );
+    res.send({ success: true, message: 'updated' });
+  } catch (error) {
+    res.send({ success: false, message: error.message });
+  }
+};
 module.exports = {
   createChat,
   getUsersAndUreadedChat,
   getChatDesignation,
   getPreviousMessage,
+  clearUnread,
 };
