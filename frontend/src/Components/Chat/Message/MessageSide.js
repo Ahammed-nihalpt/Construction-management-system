@@ -16,17 +16,25 @@ import SingleMessage from "../Single Message/SingleMessage";
 function MessageSide({ id, account }) {
   const [sendMsg, setSnedMsg] = useState();
   const [inputValue, setInputValue] = useState("");
-  const socket = io("http://localhost:9000");
   const [user, setUser] = useState({});
   const [Designation, setDesignation] = useState();
+  const [socketConnect, setSocketConnect] = useState();
   useEffect(() => {
+    const socket = io("http://localhost:9000", {
+      query: {
+        userId: localStorage.getItem("id"),
+      },
+    });
+    setSocketConnect(socket);
     if (id) {
       getChatHistoryUser(localStorage.getItem("id"), id).then((respon) => {
-        const smsg = respon.data.sndMessage;
-        const rmsg = respon.data.receiveMessage;
-        const msg = [...smsg, ...rmsg];
-        console.log(msg);
-        setSnedMsg([...smsg, ...rmsg]);
+        const smsg = respon.data.sndMessage[0].message;
+        const rmsg = respon.data.receiveMessage[0].message;
+
+        const filsndmsg = smsg.map((msg) => ({ ...msg, sender: true }));
+        const filremsg = rmsg.map((msg) => ({ ...msg, sender: false }));
+        const msg = filremsg.concat(filsndmsg);
+        setSnedMsg(msg);
       });
     }
 
@@ -63,19 +71,32 @@ function MessageSide({ id, account }) {
       });
     }
 
-    socket.on("chat message", (msg) => {
-      setSnedMsg((prevMessages) => [...prevMessages, msg]);
+    socket.on("chat-message", (msg, date) => {
+      setSnedMsg((prevMessages) => [
+        ...prevMessages,
+        { date, content: msg.msg, sender: false },
+      ]);
     });
     return () => {
       socket.disconnect();
     };
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [id]);
 
   const handleFormSubmit = (event) => {
     event.preventDefault();
     if (inputValue.trim() === "") return;
-    setSnedMsg((prevMessages) => [...prevMessages, inputValue]);
-    socket.emit("chat message", inputValue, id, localStorage.getItem("id"));
+    setSnedMsg((prevMessages) => [
+      ...prevMessages,
+      { date: Date.now(), content: inputValue, sender: true },
+    ]);
+    socketConnect.emit(
+      "chat-message",
+      inputValue,
+      id,
+      localStorage.getItem("id"),
+      Date.now
+    );
     setInputValue("");
   };
 
@@ -102,7 +123,9 @@ function MessageSide({ id, account }) {
       <div className="ms_body">
         <div class="chat__message chat__message-own">
           <div class="date"></div>
-          {id && <SingleMessage messages={sendMsg} currentUserId={id} />}
+          {id && sendMsg && (
+            <SingleMessage messages={sendMsg} currentUserId={id} />
+          )}
           {!id && <h4>Select a user</h4>}
         </div>
       </div>

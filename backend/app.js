@@ -34,8 +34,6 @@ app.use('/user', userRouter);
 app.use('/admin', adminRouter);
 app.use('/chat', chatRouter);
 
-// app.listen(port, () => console.log(`App now listening on port ${port}`));
-
 // eslint-disable-next-line import/no-extraneous-dependencies
 const socketio = require('socket.io');
 const { createChat } = require('./Controllers/ChatController');
@@ -49,15 +47,29 @@ const io = socketio(http, {
   },
 });
 
-io.on('connection', (socket) => {
-  socket.on('disconnect', () => {});
+const users = {};
 
-  socket.on('chat message', (msg, rid, sid) => {
-    console.log(`Message: ${msg}-${sid}-${rid}`);
+io.on('connection', (socket) => {
+  const { userId } = socket.handshake.query;
+  users[userId] = socket.id;
+  console.log(`connected to ${userId}, with id ${socket.id}`);
+
+  socket.on('disconnect', () => {
+    // eslint-disable-next-line no-restricted-syntax
+    for (const uId in users) {
+      if (users[uId] === socket.id) {
+        delete users[uId];
+        console.log(`User disconnected: ${uId}`);
+        break;
+      }
+    }
+  });
+
+  socket.on('chat-message', (msg, rid, sid, date) => {
     createChat(sid, rid, msg);
-    const receiverRoom = io.sockets.adapter.rooms.get(rid);
-    if (receiverRoom) {
-      io.to(receiverRoom).emit('message');
+    const recipientSocketId = users[rid];
+    if (recipientSocketId) {
+      io.to(recipientSocketId).emit('chat-message', { msg, date });
     }
   });
 });

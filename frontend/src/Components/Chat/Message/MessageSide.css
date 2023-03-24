@@ -24,7 +24,10 @@
 
 .ms_body {
   background-color: #ecf2f6;
-  height: 100%;
+  height: 515px;
+  padding: 10px;
+  scroll-behavior: smooth;
+  overflow-y: scroll;
 }
 
 .ms_foot {

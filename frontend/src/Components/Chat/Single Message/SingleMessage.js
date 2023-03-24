@@ -25,19 +25,19 @@ const ReceivedMessage = ({ message }) => {
 };
 
 const SingleMessage = ({ messages, currentUserId }) => {
+  const sortedMessages = messages.sort(
+    (a, b) => new Date(a.date) - new Date(b.date)
+  );
   return (
     <div className="chat">
-      {messages.map((message) => {
-        if (message.sender === currentUserId) {
-          return (
-            <SentMessage key={message.message._id} message={message.message} />
-          );
-        } else {
-          return (
-            <ReceivedMessage key={message._id} message={message.message} />
-          );
-        }
-      })}
+      {messages &&
+        sortedMessages.map((message) => {
+          if (message.sender) {
+            return <SentMessage key={message._id} message={message} />;
+          } else {
+            return <ReceivedMessage key={message._id} message={message} />;
+          }
+        })}
     </div>
   );
 };
