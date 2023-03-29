@@ -7,6 +7,10 @@ const router = express.Router();
 
 router.post('/login', controller.adminLogin);
 router.get('/all/companies', validateAdminToken, controller.getAllCompanies);
-router.get('/change/company/status/:id', controller.blockUnblockCompany);
+router.get(
+  '/change/company/status/:id',
+  validateAdminToken,
+  controller.blockUnblockCompany
+);
 
 module.exports = router;

@@ -1,18 +1,16 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
+import CompanyReports from "../../../Components/Company/Company Reports/CompanyReports";
 import Sidebar from "../../../Components/Sidebar/sidebar";
 import Topnav from "../../../Components/Topnav/Topnav";
-import Dashboard from "../../../Components/Company/Dashboard/Dashboard";
-import "./Home.css";
 
-function Home() {
+function Report() {
   // eslint-disable-next-line no-unused-vars
   const [toggle, setToggle] = useState(
     useSelector((state) => {
       return state.toggle;
     })
   );
-
   return (
     <div className="home">
       <div className="side_nav">
@@ -22,10 +20,10 @@ function Home() {
         <div className="top_nav">
           <Topnav />
         </div>
-        <Dashboard />
+        <CompanyReports />
       </div>
     </div>
   );
 }
 
-export default Home;
+export default Report;

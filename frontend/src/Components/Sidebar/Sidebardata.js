@@ -33,7 +33,7 @@ export const comapnySidebarData = [
   },
   {
     title: "Reports",
-    link: "/home",
+    link: "/company/report",
     icon: <SummarizeSharpIcon />,
   },
 ];

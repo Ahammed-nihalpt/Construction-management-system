@@ -35,6 +35,7 @@ function Features() {
 
     return () => {
       if (targetRef.current) {
+        // eslint-disable-next-line react-hooks/exhaustive-deps
         observer.unobserve(targetRef.current);
       }
     };
@@ -129,42 +130,6 @@ function Features() {
             )}
           </div>
         </div>
-        {/* <div
-          className="single_features slide-in-bck-center"
-          onMouseEnter={() => {
-            featrueDetails("two");
-          }}
-          onMouseLeave={onFeatureMouseLeave}
-        >
-          <div className="feimage">
-            <img
-              src="http://localhost:9000/image/feature/fe 1.jpg"
-              className={featureDis !== "two" ? "" : "less_bri kenburns-top"}
-              alt=""
-            />
-            {featureDis === "two" && (
-              <div className="fe_details slide-in-bottom">asdf</div>
-            )}
-          </div>
-        </div>
-        <div
-          className="single_features slide-in-bck-center"
-          onMouseEnter={() => {
-            featrueDetails("three");
-          }}
-          onMouseLeave={onFeatureMouseLeave}
-        >
-          <div className="feimage">
-            <img
-              src="http://localhost:9000/image/feature/fe 1.jpg"
-              className={featureDis !== "three" ? "" : "less_bri kenburns-top"}
-              alt=""
-            />
-            {featureDis === "three" && (
-              <div className="fe_details slide-in-bottom">asdfsdaf</div>
-            )}
-          </div>
-        </div> */}
       </div>
       <div className="fe_head">
         <h1 className={headingEffect ? "text-pop-up-top " : ""} ref={targetRef}>

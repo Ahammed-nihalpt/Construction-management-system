@@ -38,6 +38,11 @@ const ProgressSchema = new Schema({
         type: String,
         required: true,
       },
+      dateChk: {
+        type: Date,
+        default: Date.now,
+        require: true,
+      },
     },
   ],
 });

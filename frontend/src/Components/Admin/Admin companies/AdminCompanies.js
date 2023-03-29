@@ -10,6 +10,7 @@ import {
 } from "../../../Helpers/config/axiosAdminEndpoints";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";
+import Swal from "sweetalert2";
 
 const Alert = React.forwardRef(function Alert(props, ref) {
   return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
@@ -81,11 +82,29 @@ function AdminCompanies() {
     }
   };
   const handleBlockUnblock = (id) => {
-    blockUblockEnpoint(id).then((response) => {
-      if (response.data.success) {
-        setOpen(true);
-      }
-    });
+    blockUblockEnpoint(id)
+      .then((response) => {
+        if (response.data.success) {
+          setOpen(true);
+        } else {
+          Swal.fire({
+            icon: "error",
+            title: "Opps!!!",
+            text: response.data.message,
+          }).then(() => {
+            navigate("/admin/login");
+          });
+        }
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "Opps!!!",
+          text: "Something went wrong",
+        }).then(() => {
+          navigate("/admin/login");
+        });
+      });
   };
 
   useEffect(() => {

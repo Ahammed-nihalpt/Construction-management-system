@@ -28,7 +28,7 @@ const userSchema = new Schema({
         required: true,
       },
       designation_id: {
-        type: String,
+        type: mongoose.Schema.Types.ObjectId,
         required: true,
       },
       image: {

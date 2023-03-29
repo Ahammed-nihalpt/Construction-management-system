@@ -20,24 +20,8 @@ function ViewProgress({ id }) {
     getAllProgressEndpoint(id).then((response) => {
       if (response.data.success) {
         const datas = response.data.docs;
-        const currentDate = new Date();
-        let closestDate = null;
-        let closestDiff = Infinity;
-        for (const value of datas) {
-          const date = new Date(value.date);
-          const diff = Math.abs(currentDate.getTime() - date.getTime());
 
-          if (diff < closestDiff) {
-            closestDate = date;
-            closestDiff = diff;
-          }
-        }
-        const finalDate = `${
-          closestDate.getMonth() + 1
-        }-${closestDate.getDate()}-${closestDate.getFullYear()}`;
-        console.log(finalDate);
-        const doc = datas.filter((value) => value.date === finalDate);
-        setprogress(doc[0]);
+        setprogress(datas[0]);
       }
     });
   }, [id]);

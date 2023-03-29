@@ -2,9 +2,10 @@ import React, { useEffect, useState } from "react";
 import "./CompanyUsers.css";
 import { useNavigate } from "react-router-dom";
 import { getUserEndPoint } from "../../../Helpers/config/axiosEndpoints";
+import Swal from "sweetalert2";
 
 function CompanyUsers() {
-  const nagvigate = useNavigate();
+  const navigate = useNavigate();
   const [users, setUsers] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [result, setResult] = useState([]);
@@ -17,15 +18,24 @@ function CompanyUsers() {
       );
       setResult(filteredUser);
     }
-    console.log(result);
-    console.log(searchQuery);
   };
 
   useEffect(() => {
-    getUserEndPoint(localStorage.getItem("id")).then((response) => {
-      const data = response.data.users.users;
-      setUsers(data);
-    });
+    getUserEndPoint(localStorage.getItem("id"))
+      .then((response) => {
+        const data = response.data.users.users;
+        setUsers(data);
+      })
+      .catch((error) => {
+        Swal.fire({
+          icon: "error",
+          title: "401",
+          text: "Error Unauthorized Access",
+        }).then(() => {
+          navigate("/");
+        });
+      });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   return (
@@ -38,7 +48,7 @@ function CompanyUsers() {
           <button
             className="filbtn"
             onClick={() => {
-              nagvigate("/company/users/add");
+              navigate("/company/users/add");
             }}
           >
             Add Users
@@ -46,7 +56,7 @@ function CompanyUsers() {
           <button
             className="filbtn"
             onClick={() => {
-              nagvigate("/company/users/desgination");
+              navigate("/company/users/desgination");
             }}
           >
             Add Designation
@@ -70,7 +80,7 @@ function CompanyUsers() {
               <div
                 className="single_project col-12 col-md-3"
                 onClick={() =>
-                  nagvigate("/company/users/view", {
+                  navigate("/company/users/view", {
                     state: {
                       id: value._id,
                     },

@@ -8,11 +8,13 @@ import {
 import {
   getAllChatUsers,
   getChatDesignation,
-  getPermissionEndpoint,
   clearUnreadUser,
 } from "../../../Helpers/config/axiosUserEndpoins";
+import Swal from "sweetalert2";
+import { useNavigate } from "react-router-dom";
 
 function ChatList(props) {
+  const navigate = useNavigate();
   const [userData, setUserData] = useState([]);
   const [desgination, setDesgination] = useState([]);
   const [unread, setUnread] = useState([]);
@@ -27,24 +29,38 @@ function ChatList(props) {
         });
       });
     } else if (props.account === "user") {
-      getAllChatUsers(
-        localStorage.getItem("cid"),
-        localStorage.getItem("id")
-      ).then((res) => {
-        if (res.data.success) {
-          const data = res.data.data[0].users;
-          const count = res.data.unread;
-          getChatDesignation(localStorage.getItem("cid")).then((resp) => {
-            if (resp.data.success) {
-              const de = resp.data.designation;
-              setDesgination(de);
-              setUserData(data);
-              setUnread(count);
-            }
+      getAllChatUsers(localStorage.getItem("cid"), localStorage.getItem("id"))
+        .then((res) => {
+          if (res.data.success) {
+            const data = res.data.data[0].users;
+            const count = res.data.unread;
+            getChatDesignation(localStorage.getItem("cid")).then((resp) => {
+              if (resp.data.success) {
+                const de = resp.data.designation;
+                setDesgination(de);
+                setUserData(data);
+                setUnread(count);
+              }
+            });
+          } else {
+            Swal.fire({
+              icon: "error",
+              title: "Opps!!!",
+              text: "Something went wrong",
+            });
+          }
+        })
+        .catch((error) => {
+          Swal.fire({
+            icon: "error",
+            title: "Opps!!!",
+            text: "Something went wrong",
+          }).then(() => {
+            navigate("/admin/login");
           });
-        }
-      });
+        });
     }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
   const handleOnUserClick = (id) => {
@@ -90,7 +106,7 @@ function ChatList(props) {
                   read.sender === value._id && read.unreadMessages !== 0 ? (
                     <label>{read.unreadMessages}</label>
                   ) : (
-                    "asdf"
+                    ""
                   )
                 )}
               </div>

@@ -1,6 +1,7 @@
 const express = require('express');
 const controller = require('../Controllers/CompanyController');
 const tokenMiddleware = require('../Middleware/token');
+const commonTokenMiddleware = require('../Middleware/commonToken');
 
 const router = express.Router();
 
@@ -22,8 +23,16 @@ router.post('/edit/pofile/:id', tokenMiddleware, controller.companyEditImage);
 router.get('/all/projects/:id', tokenMiddleware, controller.getProjects);
 router.get('/project/:id', tokenMiddleware, controller.getSingleProject);
 router.post('/edit/project/:id', tokenMiddleware, controller.editProject);
-router.post('/project/schedule/add', tokenMiddleware, controller.addSchedule);
-router.get('/project/schedule/:id', tokenMiddleware, controller.getSchedules);
+router.post(
+  '/project/schedule/add',
+  commonTokenMiddleware,
+  controller.addSchedule
+);
+router.get(
+  '/project/schedule/:id',
+  commonTokenMiddleware,
+  controller.getSchedules
+);
 router.post(
   '/project/schedule/delete',
   tokenMiddleware,
@@ -62,5 +71,11 @@ router.post(
   tokenMiddleware,
   controller.razorPaymentverification
 );
+router.get(
+  '/project/payment/:id',
+  tokenMiddleware,
+  controller.getPaymentOfProject
+);
+router.post('/get/userlist', tokenMiddleware, controller.getUserList);
 
 module.exports = router;

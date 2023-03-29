@@ -1,19 +1,19 @@
 import axios from "./axiosInstance";
 
-export const config = {
+const config = {
   headers: {
     Authorization: `${localStorage.getItem("token")}`,
   },
 };
 
-export const imgConfig = {
+const imgConfig = {
   headers: {
     Authorization: `${localStorage.getItem("token")}`,
     "Content-Type": "multipart/form-data",
   },
 };
 
-export const getAllProjects = () =>
+export const getAllProjects = (id) =>
   axios.get(`/company/all/projects/${localStorage.getItem("id")}`, config);
 
 export const addProject = (formdata) =>
@@ -75,8 +75,14 @@ export const changePaymentStatus = (id, value) =>
     config
   );
 
+export const getProjectPayment = (pid) =>
+  axios.get(`/company/project/payment/${pid}`, config);
+
 export const onlinePayEndpoint = (id, amount) =>
   axios.post("/company/razor/payment", { id, amount }, config);
 
 export const verifyPaymentEndpoint = (id, payment) =>
   axios.post("/company/razor/verify/payment", { id, payment }, config);
+
+export const getUserListEndpoint = (company_id, designation_id) =>
+  axios.post("/company/get/userlist", { company_id, designation_id }, config);

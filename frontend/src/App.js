@@ -13,6 +13,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 function App() {
   const token = localStorage.getItem("token");
+
   return (
     <div className="App">
       <ToastContainer />

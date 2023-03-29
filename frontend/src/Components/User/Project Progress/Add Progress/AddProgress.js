@@ -123,6 +123,7 @@ function AddProgress() {
         title: "Oops...",
         text: error,
       });
+      console.log(error);
       setPermissionStatus("denied");
     }
   };

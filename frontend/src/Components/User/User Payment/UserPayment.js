@@ -31,7 +31,8 @@ function UserPayment() {
     getUserPaymentHistoryEndpoint(localStorage.getItem("id")).then(
       (response) => {
         if (response.data.success) {
-          setPayments(response.data.payments);
+          const sortedPayments = response.data.payments;
+          setPayments(sortedPayments);
         }
       }
     );

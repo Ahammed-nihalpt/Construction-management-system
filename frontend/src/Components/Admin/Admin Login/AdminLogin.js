@@ -34,7 +34,13 @@ function AdminLogin() {
           }
         })
         .catch((e) => {
-          console.log(e);
+          Swal.fire({
+            icon: "error",
+            title: "Opps!!!",
+            text: "Something went wrong",
+          }).then(() => {
+            navigate("/");
+          });
         });
     }
   };

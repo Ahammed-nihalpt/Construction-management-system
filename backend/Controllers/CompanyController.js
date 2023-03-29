@@ -631,7 +631,9 @@ const getAllPayment = async (req, res) => {
           as: 'user_info',
         },
       },
+      { $sort: { date: -1 } },
     ]);
+    console.log(payments);
     res.send({ success: true, payments });
   } catch (error) {
     res.send({ success: false, message: 'Something went wrong!!!' });
@@ -690,6 +692,126 @@ const razorPaymentverification = async (req, res) => {
   res.send({ success: true });
 };
 
+const getPaymentOfProject = async (req, res) => {
+  try {
+    const { id } = req.params;
+    const objectId = mongoose.Types.ObjectId(id);
+    const data = await PaymentModel.aggregate([
+      {
+        $match: { project_id: objectId },
+      },
+      {
+        $lookup: {
+          from: 'users',
+          let: { userId: '$user_id' },
+          pipeline: [
+            {
+              $match: {
+                $expr: { $in: ['$$userId', '$users._id'] },
+              },
+            },
+            {
+              $project: {
+                matched_user: {
+                  $arrayElemAt: [
+                    '$users',
+                    {
+                      $indexOfArray: ['$users._id', '$$userId'],
+                    },
+                  ],
+                },
+              },
+            },
+          ],
+          as: 'user_info',
+        },
+      },
+      {
+        $project: {
+          date: 1,
+          amount: 1,
+          payment_for: 1,
+          status: 1,
+          _id: 0,
+          'user_info.matched_user.name': 1,
+        },
+      },
+      { $sort: { date: -1 } },
+    ]);
+    res.send({ success: true, data });
+  } catch (error) {
+    res.send({ success: false, message: error.message });
+  }
+};
+
+const getUserList = async (req, res) => {
+  try {
+    const { company_id, designation_id } = req.body;
+    let data = [];
+    if (designation_id !== 'All') {
+      const objectId = mongoose.Types.ObjectId(designation_id);
+      data = await UserModel.aggregate([
+        {
+          $match: {
+            'users.designation_id': objectId, // replace with the desired designation_id
+          },
+        },
+        {
+          $lookup: {
+            from: 'designations',
+            localField: 'users.designation_id',
+            foreignField: '_id',
+            as: 'designation',
+          },
+        },
+        {
+          $project: {
+            users: {
+              $filter: {
+                input: '$users',
+                as: 'user',
+                cond: {
+                  $eq: ['$$user.designation_id', objectId], // replace with the desired designation_id
+                },
+              },
+            },
+            designation: {
+              $arrayElemAt: ['$designation', 0],
+            },
+          },
+        },
+        { $unwind: '$users' },
+      ]);
+    } else {
+      data = await UserModel.aggregate([
+        {
+          $match: {
+            company_id,
+          },
+        },
+        {
+          $unwind: '$users',
+        },
+        {
+          $lookup: {
+            from: 'designations',
+            localField: 'users.designation_id',
+            foreignField: '_id',
+            as: 'designation',
+          },
+        },
+        {
+          $unwind: '$designation',
+        },
+      ]);
+    }
+
+    res.send({ success: true, data });
+  } catch (error) {
+    res.send({ success: false, message: error.message });
+  }
+};
+
 module.exports = {
   Registration,
   verifyOTP,
@@ -720,4 +842,7 @@ module.exports = {
   paymentStatus,
   razorPayment,
   razorPaymentverification,
+  // Report
+  getPaymentOfProject,
+  getUserList,
 };

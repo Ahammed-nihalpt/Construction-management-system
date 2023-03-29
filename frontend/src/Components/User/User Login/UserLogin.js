@@ -1,8 +1,10 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
+import { useNavigate } from "react-router-dom";
 import Swal from "sweetalert2";
 import { userLoginEndPoint } from "../../../Helpers/config/axiosEndpoints";
 
 function UserLogin() {
+  const navigate = useNavigate();
   const intialValue = {
     cmpid: "",
     password: "",
@@ -46,6 +48,14 @@ function UserLogin() {
         });
     }
   };
+
+  useEffect(() => {
+    const token = localStorage.getItem("token");
+    if (token) {
+      navigate(-1);
+    }
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const validate = (values) => {
     const errors = {};

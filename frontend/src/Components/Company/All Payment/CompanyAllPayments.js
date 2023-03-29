@@ -18,8 +18,8 @@ function CompanyAllPayments() {
   useEffect(() => {
     getAllPaymentsEndpoint(localStorage.getItem("id")).then((response) => {
       if (response.data.success) {
-        const data = response.data.payments;
-        setPayments(data);
+        const sortedPayments = response.data.payments;
+        setPayments(sortedPayments);
       } else {
         toast.error("Something went wrong try again");
       }

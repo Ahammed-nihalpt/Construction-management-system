@@ -234,7 +234,7 @@ const getAllProgress = async (req, res) => {
   try {
     const { id } = req.params;
     const progress = await ProgressModel.findOne({ project_id: id }).sort({
-      id: -1,
+      dateChk: -1,
     });
     res.send({ success: true, docs: progress.progresses });
   } catch (error) {
@@ -296,6 +296,7 @@ const getPaymentHistory = async (req, res) => {
           as: 'projects',
         },
       },
+      { $sort: { date: -1 } },
     ]);
     res.send({ success: true, payments });
   } catch (error) {

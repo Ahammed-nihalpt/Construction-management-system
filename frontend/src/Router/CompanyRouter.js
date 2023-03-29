@@ -8,6 +8,7 @@ import Chat from "../Pages/Chat Page/Chat";
 import Home from "../Pages/Company/Home/Home";
 import CompanyPayment from "../Pages/Company/Payment/CompanyPayment";
 import Project from "../Pages/Company/Projects/Project";
+import Report from "../Pages/Company/Report/Report";
 import User from "../Pages/Company/Users/User";
 
 function CompanyRouter() {
@@ -131,6 +132,10 @@ function CompanyRouter() {
         element={
           token ? <Chat account="company" /> : <Navigate to="/company/login" />
         }
+      />
+      <Route
+        path="/report"
+        element={token ? <Report /> : <Navigate to="/company/login" />}
       />
     </Routes>
   );

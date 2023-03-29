@@ -38,8 +38,13 @@ const projectSchema = new Schema({
   },
   image: {
     type: String,
-    require: true,
+    required: true,
     default: null,
+  },
+  status: {
+    type: String,
+    default: 'On going',
+    required: true,
   },
   access: [{ type: String, default: null }],
 });

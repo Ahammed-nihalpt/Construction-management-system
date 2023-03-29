@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import { Route, Routes } from "react-router-dom";
+import { Route, Routes, Navigate } from "react-router-dom";
 import PermissionDenied from "../Components/Permission Denied/PermissionDenied";
 import {
   getPermissionEndpoint,
@@ -11,6 +11,7 @@ import UserPaymentPage from "../Pages/User/Payment/UserPaymentPage";
 import UserProject from "../Pages/User/Project/UserProject";
 
 function UserRouter() {
+  const token = localStorage.getItem("token");
   const [permission, setPermission] = useState({});
   useEffect(() => {
     getUserDataEndpoint(localStorage.getItem("id")).then((response) => {
@@ -27,7 +28,10 @@ function UserRouter() {
 
   return (
     <Routes>
-      <Route path="/home" element={<UserHome />} />
+      <Route
+        path="/home"
+        element={token ? <UserHome /> : <Navigate to={"/user/login"} />}
+      />
       <Route
         path="/projects"
         element={
@@ -40,26 +44,80 @@ function UserRouter() {
       />
       <Route
         path="/projects/view"
-        element={<UserProject type="single" action="view" />}
+        element={
+          token ? (
+            <UserProject type="single" action="view" />
+          ) : (
+            <Navigate to={"/user/login"} />
+          )
+        }
       />
       <Route
         path="/projects/view/edit"
-        element={<UserProject type="single" action="edit" />}
+        element={
+          token ? (
+            <UserProject type="single" action="edit" />
+          ) : (
+            <Navigate to={"/user/login"} />
+          )
+        }
       />
       <Route
         path="/projects/view/progress"
-        element={<UserProject type="single" action="progress" />}
+        element={
+          token ? (
+            <UserProject type="single" action="progress" />
+          ) : (
+            <Navigate to={"/user/login"} />
+          )
+        }
+      />
+      <Route
+        path="/projects/view/schedule"
+        element={
+          token ? (
+            <UserProject type="single" action="schedule" />
+          ) : (
+            <Navigate to="/company/login" />
+          )
+        }
       />
       <Route
         path="/projects/view/all/progress"
-        element={<UserProject type="allProgress" action="view" />}
+        element={
+          token ? (
+            <UserProject type="allProgress" action="view" />
+          ) : (
+            <Navigate to={"/user/login"} />
+          )
+        }
       />
       <Route
         path="/projects/view/add/progress"
-        element={<UserProject type="addProgress" />}
+        element={
+          token ? (
+            <UserProject type="addProgress" />
+          ) : (
+            <Navigate to={"/user/login"} />
+          )
+        }
       />
-      <Route path="/payment" element={<UserPaymentPage type="user" />} />
-      <Route path="/chat" element={<Chat account="user" />} />
+      <Route
+        path="/payment"
+        element={
+          token ? (
+            <UserPaymentPage type="user" />
+          ) : (
+            <Navigate to={"/user/login"} />
+          )
+        }
+      />
+      <Route
+        path="/chat"
+        element={
+          token ? <Chat account="user" /> : <Navigate to={"/user/login"} />
+        }
+      />
     </Routes>
   );
 }
