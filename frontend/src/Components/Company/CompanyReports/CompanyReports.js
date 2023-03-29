@@ -11,7 +11,7 @@ import {
   createExcelProjectFile,
   generateUsertPDF,
   createExcelUserFile,
-} from "../../../Helpers/Helper Functions/ReportFuntions";
+} from "../../../Helpers/HelperFunctions/ReportFuntions";
 import "./CompanyReports.css";
 
 function CompanyReports() {

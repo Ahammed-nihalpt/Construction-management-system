@@ -1,15 +1,15 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import EditProject from "../Project action/Edit project/EditProject";
-import ProjectSchedule from "../Project action/Project schedule/ProjectSchedule";
-import SideMenu from "../Project action/Side menu/SideMenu";
+import EditProject from "../ProjectAction/EditProject/EditProject";
+import ProjectSchedule from "../ProjectAction/ProjectSchedule/ProjectSchedule";
+import SideMenu from "../ProjectAction/SideMenu/SideMenu";
 import "./SingleProjectView.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AddData } from "../../../Redux/Company/Action";
 import { getSingleProject } from "../../../Helpers/config/axiosEndpoints";
-import ProjectDetails from "../Project action/Project Details/ProjectDetails";
-import AddUserAccess from "../Project action/Add User Access/AddUserAccess";
-import ViewProgress from "../../User/Project Progress/View Progress/ViewProgress";
+import ProjectDetails from "../ProjectAction/ProjectDetails/ProjectDetails";
+import AddUserAccess from "../ProjectAction/AddUserAccess/AddUserAccess";
+import ViewProgress from "../../User/ProjectProgress/ViewProgress/ViewProgress";
 
 function SingleProjectView({ action }) {
   const dispatch = useDispatch();

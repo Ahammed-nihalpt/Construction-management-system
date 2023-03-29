@@ -1,6 +1,6 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import AdminCompanies from "../../../Components/Admin/Admin companies/AdminCompanies";
+import AdminCompanies from "../../../Components/Admin/AdminCompanies/AdminCompanies";
 import Sidebar from "../../../Components/Sidebar/sidebar";
 import Topnav from "../../../Components/Topnav/Topnav";
 

@@ -2,10 +2,10 @@ import React from "react";
 import Sidebar from "../../../Components/Sidebar/sidebar";
 import Topnav from "../../../Components/Topnav/Topnav";
 import { useSelector } from "react-redux";
-import UserProjectView from "../../../Components/User/User Project View/UserProjectView";
-import UserProjectSingleView from "../../../Components/User/User Project Single View/UserProjectSingleView";
-import ViewAllProgress from "../../../Common/View All Progress/ViewAllProgress";
-import AddProgress from "../../../Components/User/Project Progress/Add Progress/AddProgress";
+import UserProjectView from "../../../Components/User/UserProjectView/UserProjectView";
+import UserProjectSingleView from "../../../Components/User/UserProjectSingleView/UserProjectSingleView";
+import ViewAllProgress from "../../../Common/ViewAllProgress/ViewAllProgress";
+import AddProgress from "../../../Components/User/ProjectProgress/AddProgress/AddProgress";
 
 function UserProject({ type, action }) {
   return (

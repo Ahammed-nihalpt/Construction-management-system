@@ -1,7 +1,7 @@
 import { useSelector } from "react-redux";
-import CompanyAddProject from "../../../Components/Company/Company Add Project/CompanyAddProject";
-import CompanyProjectView from "../../../Components/Company/Company project view/CompanyProjectView";
-import SingleProjectView from "../../../Components/Company/Compnay single project view/SingleProjectView";
+import CompanyAddProject from "../../../Components/Company/CompanyAddProject/CompanyAddProject";
+import CompanyProjectView from "../../../Components/Company/CompanyProjectView/CompanyProjectView";
+import SingleProjectView from "../../../Components/Company/CompnaySingleProjectView/SingleProjectView";
 import Sidebar from "../../../Components/Sidebar/sidebar";
 import Topnav from "../../../Components/Topnav/Topnav";
 import "./Project.css";

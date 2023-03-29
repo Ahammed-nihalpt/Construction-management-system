@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from "react";
 import { Route, Routes, Navigate } from "react-router-dom";
-import PermissionDenied from "../Components/Permission Denied/PermissionDenied";
+import PermissionDenied from "../Components/PermissionDenied/PermissionDenied";
 import {
   getPermissionEndpoint,
   getUserDataEndpoint,
 } from "../Helpers/config/axiosUserEndpoins";
-import Chat from "../Pages/Chat Page/Chat";
+import Chat from "../Pages/ChatPage/Chat";
 import UserHome from "../Pages/User/Home/UserHome";
 import UserPaymentPage from "../Pages/User/Payment/UserPaymentPage";
 import UserProject from "../Pages/User/Project/UserProject";

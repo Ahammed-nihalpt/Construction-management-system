@@ -6,7 +6,7 @@ import { addProject } from "../../../Helpers/config/axiosEndpoints";
 import {
   AddProjectvalidate,
   AddProductImageValidate,
-} from "../../../Helpers/Form Validation/AddProjectValidation";
+} from "../../../Helpers/FormValidation/AddProjectValidation";
 import { useNavigate } from "react-router-dom";
 import mapboxgl from "mapbox-gl";
 import "mapbox-gl/dist/mapbox-gl.css";

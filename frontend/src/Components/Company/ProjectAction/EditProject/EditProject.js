@@ -5,7 +5,7 @@ import {
   getSingleProject,
   editProject,
 } from "../../../../Helpers/config/axiosEndpoints";
-import { editProjectValidation } from "../../../../Helpers/Form Validation/AddProjectValidation";
+import { editProjectValidation } from "../../../../Helpers/FormValidation/AddProjectValidation";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";

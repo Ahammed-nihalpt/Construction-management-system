@@ -1,9 +1,9 @@
 import React from "react";
-import LandingCarousel from "../../Components/Landing Page Components/Carousel/LandingCarousel";
-import Features from "../../Components/Landing Page Components/Features/Features";
-import LandingNav from "../../Components/Landing Page Components/Landing Nav/LandingNav";
-import About from "../../Components/Landing Page Components/Landing page content/About/About";
-import LoginSignup from "../../Components/Landing Page Components/LoginSignup/LoginSignup";
+import LandingCarousel from "../../Components/LandingPageComponents/Carousel/LandingCarousel";
+import Features from "../../Components/LandingPageComponents/Features/Features";
+import LandingNav from "../../Components/LandingPageComponents/LandingNav/LandingNav";
+import About from "../../Components/LandingPageComponents/LandingPageContent/About/About";
+import LoginSignup from "../../Components/LandingPageComponents/LoginSignup/LoginSignup";
 
 function LandingPage() {
   return (

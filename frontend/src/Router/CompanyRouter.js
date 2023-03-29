@@ -1,10 +1,10 @@
 import React from "react";
 import { Navigate, Route, Routes } from "react-router-dom";
-import Opt from "../Components/Company/Company OTP/opt";
-import CompanyPassword from "../Components/Company/Company password/CompanyPassword";
-import CompanyRegistration from "../Components/Company/Company registration/CompanyRegistration";
+import Opt from "../Components/Company/CompanyOTP/opt";
+import CompanyPassword from "../Components/Company/CompanyPassword/CompanyPassword";
+import CompanyRegistration from "../Components/Company/CompanyRegistration/CompanyRegistration";
 import CompanyLogin from "../Components/Company/CompanyLogin/CompanyLogin";
-import Chat from "../Pages/Chat Page/Chat";
+import Chat from "../Pages/ChatPage/Chat";
 import Home from "../Pages/Company/Home/Home";
 import CompanyPayment from "../Pages/Company/Payment/CompanyPayment";
 import Project from "../Pages/Company/Projects/Project";

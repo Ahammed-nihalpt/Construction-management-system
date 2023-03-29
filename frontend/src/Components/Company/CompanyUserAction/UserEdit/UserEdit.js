@@ -3,11 +3,10 @@ import {
   editProject,
   getDesignationEndPoint,
 } from "../../../../Helpers/config/axiosEndpoints";
-import { editProjectValidation } from "../../../../Helpers/Form Validation/AddProjectValidation";
+import { editProjectValidation } from "../../../../Helpers/FormValidation/AddProjectValidation";
 import Button from "@mui/material/Button";
 import Box from "@mui/material/Box";
 import { useDispatch } from "react-redux";
-// import Fab from "@mui/material/Fab";
 import { blue } from "@mui/material/colors";
 import { CircularProgress } from "@mui/material";
 import Snackbar from "@mui/material/Snackbar";

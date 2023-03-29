@@ -2,7 +2,7 @@ import React from "react";
 import { useSelector } from "react-redux";
 import Sidebar from "../../../Components/Sidebar/sidebar";
 import Topnav from "../../../Components/Topnav/Topnav";
-import UserPayment from "../../../Components/User/User Payment/UserPayment";
+import UserPayment from "../../../Components/User/UserPayment/UserPayment";
 
 function UserPaymentPage() {
   return (

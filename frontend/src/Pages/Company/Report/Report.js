@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import { useSelector } from "react-redux";
-import CompanyReports from "../../../Components/Company/Company Reports/CompanyReports";
+import CompanyReports from "../../../Components/Company/CompanyReports/CompanyReports";
 import Sidebar from "../../../Components/Sidebar/sidebar";
 import Topnav from "../../../Components/Topnav/Topnav";
 

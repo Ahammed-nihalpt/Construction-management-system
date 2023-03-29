@@ -11,7 +11,7 @@ import {
   getChatHistoryUser,
   getUserDataEndpoint,
 } from "../../../Helpers/config/axiosUserEndpoins";
-import SingleMessage from "../Single Message/SingleMessage";
+import SingleMessage from "../SingleMessage/SingleMessage";
 
 function MessageSide({ id, account }) {
   const [sendMsg, setSnedMsg] = useState();

@@ -8,7 +8,7 @@ import {
 import {
   AddProductImageValidate,
   addUserValidation,
-} from "../../../Helpers/Form Validation/AddProjectValidation";
+} from "../../../Helpers/FormValidation/AddProjectValidation";
 import "./CompanyAddUser.css";
 import Snackbar from "@mui/material/Snackbar";
 import MuiAlert from "@mui/material/Alert";

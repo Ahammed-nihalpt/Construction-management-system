@@ -4,7 +4,7 @@ import "./AddProgress.css";
 import Modal from "@mui/material/Modal";
 import { Box } from "@mui/material";
 import Webcam from "react-webcam";
-import { validateProgress } from "../../../../Helpers/Form Validation/ProgressValidation";
+import { validateProgress } from "../../../../Helpers/FormValidation/ProgressValidation";
 import Swal from "sweetalert2";
 import { addProgressEndpoint } from "../../../../Helpers/config/axiosUserEndpoins";
 

@@ -8,7 +8,7 @@ import {
   userCancelPaymentEndpoint,
 } from "../../../Helpers/config/axiosUserEndpoins";
 import { toast } from "react-toastify";
-import { payValidation } from "../../../Helpers/Form Validation/PaymentValidation";
+import { payValidation } from "../../../Helpers/FormValidation/PaymentValidation";
 import Swal from "sweetalert2";
 
 function UserPayment() {

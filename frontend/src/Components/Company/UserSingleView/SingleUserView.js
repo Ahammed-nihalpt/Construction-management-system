@@ -1,14 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { useLocation } from "react-router-dom";
-import UserDetails from "../Company User Action/User Details/UserDetails";
-import SideMenu from "../Project action/Side menu/SideMenu";
+import UserDetails from "../CompanyUserAction/UserDetails/UserDetails";
+import SideMenu from "../ProjectAction/SideMenu/SideMenu";
 import { AddData } from "../../../Redux/Company/Action";
 import {
   getUserEndPoint,
   getDesignationEndPoint,
 } from "../../../Helpers/config/axiosEndpoints";
 import { useDispatch, useSelector } from "react-redux";
-import UserEdit from "../Company User Action/User Edit/UserEdit";
+import UserEdit from "../CompanyUserAction/UserEdit/UserEdit";
 
 function SingleUserView({ action }) {
   const { state } = useLocation();

@@ -1,9 +1,9 @@
 import React from "react";
 import { useSelector } from "react-redux";
-import CompanyAddDesignation from "../../../Components/Company/Company Add Designation/CompanyAddDesignation";
-import CompanyAddUser from "../../../Components/Company/Company Add User/CompanyAddUser";
-import CompanyUsers from "../../../Components/Company/Company Users/CompanyUsers";
-import SingleUserView from "../../../Components/Company/User Single View/SingleUserView";
+import CompanyAddDesignation from "../../../Components/Company/CompanyAddDesignation/CompanyAddDesignation";
+import CompanyAddUser from "../../../Components/Company/CompanyAddUser/CompanyAddUser";
+import CompanyUsers from "../../../Components/Company/CompanyUsers/CompanyUsers";
+import SingleUserView from "../../../Components/Company/UserSingleView/SingleUserView";
 import Sidebar from "../../../Components/Sidebar/sidebar";
 import Topnav from "../../../Components/Topnav/Topnav";
 import "./User.css";
