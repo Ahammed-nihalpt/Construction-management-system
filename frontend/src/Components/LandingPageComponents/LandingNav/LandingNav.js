@@ -22,7 +22,7 @@ function LandingNav() {
   return (
     <div className="landing_nav" style={navStyle}>
       <div>
-        <h1>Logo</h1>
+        <h1>CPMS</h1>
       </div>
       <div className="login_resgisert">
         <button
