@@ -52,7 +52,7 @@ function Features() {
         >
           <div className="feimage">
             <img
-              src="http://localhost:9000/image/feature/fe 1.jpg"
+              src="http://142.93.165.76:9000/image/feature/fe 1.jpg"
               className={featureDis === "one" ? "less_bri kenburns-top" : ""}
               alt=""
             />

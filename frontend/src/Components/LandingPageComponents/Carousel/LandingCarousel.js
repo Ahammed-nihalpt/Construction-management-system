@@ -3,17 +3,17 @@ import "./LandingCarousel.css";
 
 const images = [
   {
-    image: "http://localhost:9000/image/carousel/1.jpg",
+    image: "http://142.93.165.76:9000/image/carousel/1.jpg",
     head: `Construction Project Management System`,
     text: "Collaborate, communicate, and conquer with our construction project management solution.",
   },
   {
-    image: "http://localhost:9000/image/carousel/3.jpg",
+    image: "http://142.93.165.76:9000/image/carousel/3.jpg",
     head: `Construction Project Management System`,
     text: "Collaborate, communicate, and conquer with our construction project management solution.",
   },
   {
-    image: "http://localhost:9000/image/carousel/2.jpg",
+    image: "http://142.93.165.76:9000/image/carousel/2.jpg",
     head: `Construction Project Management System`,
     text: "Collaborate, communicate, and conquer with our construction project management solution.",
   },

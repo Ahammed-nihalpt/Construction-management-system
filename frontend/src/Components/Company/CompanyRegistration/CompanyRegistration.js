@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import "./CompanyRegistration.css";
 import axios from "../../../Helpers/config/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../Loader/Loader";
 import Swal from "sweetalert2";
 
 function CompanyRegistration() {
@@ -18,6 +19,7 @@ function CompanyRegistration() {
 
   const [formValues, setFormValues] = useState(intialValue);
   const [formErrors, setFormErrors] = useState({});
+  const [loaderIs, setLoaderIs] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -25,6 +27,7 @@ function CompanyRegistration() {
   };
 
   const handleSubmit = (e) => {
+    setLoaderIs(true);
     e.preventDefault();
     const er = validate(formValues);
     setFormErrors(er);
@@ -44,6 +47,7 @@ function CompanyRegistration() {
       })
         .then((response) => {
           if (response.data.status === "success") {
+            setLoaderIs(false);
             navigate("/company/otp", {
               state: {
                 id: response.data.Company_id,
@@ -56,10 +60,16 @@ function CompanyRegistration() {
               title: "Oops...",
               text: "Something went wrong!",
             });
+            setLoaderIs(false);
           }
         })
         .catch((e) => {
-          console.log(e);
+          Swal.fire({
+            icon: "error",
+            title: "Oops...",
+            text: e.message,
+          });
+          setLoaderIs(false);
         });
     }
   };
@@ -119,6 +129,7 @@ function CompanyRegistration() {
 
   return (
     <div className="registration">
+      {loaderIs && <Loader />}
       <div className="company_registration_div ">
         <div className="left">
           <div className="to_login">
