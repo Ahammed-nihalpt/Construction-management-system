@@ -10,12 +10,8 @@ const fileupload = require('express-fileupload');
 const cors = require('cors');
 
 const app = express();
-const corsOptions = {
-  origin: 'http://142.93.165.76',
-  credentials: true,
-};
+
 app.use(cors());
-app.use(cors(corsOptions));
 dotenv.config();
 app.use(fileupload());
 app.use(express.json());
@@ -49,7 +45,6 @@ const io = socketio(http, {
   cors: {
     origin: '*',
     methods: ['GET', 'POST'],
-    credentials: true,
   },
 });
 
