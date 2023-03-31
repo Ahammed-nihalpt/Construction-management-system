@@ -8,7 +8,7 @@ function About() {
         <h1 className="focus-in-expand-fwd mt-5">About</h1>
         <div className="about_main">
           <div className=" about_image">
-            <img src="http://142.93.165.76:9000/image/aboutimg.jpg" alt="" />
+            <img src="https://142.93.165.76:9000/image/aboutimg.jpg" alt="" />
           </div>
           <div className="about_text">
             <h4>A Vision of Better Building.</h4>
