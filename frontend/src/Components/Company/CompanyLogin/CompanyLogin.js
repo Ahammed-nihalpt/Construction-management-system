@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 import axios from "../../../Helpers/config/axiosInstance";
 import { useNavigate } from "react-router-dom";
+import Loader from "../../Loader/Loader";
 import "./CompanyLogin.css";
 import Swal from "sweetalert2";
 
@@ -13,6 +14,7 @@ function CompanyLogin() {
 
   const [formValues, setFormValues] = useState(intialValue);
   const [formErrors, setFormErrors] = useState({});
+  const [loaderIs, setLoaderIs] = useState(false);
 
   const handleChange = (event) => {
     const { name, value } = event.target;
@@ -23,6 +25,7 @@ function CompanyLogin() {
     e.preventDefault();
     setFormErrors(validate(formValues));
     if (Object.keys(formErrors).length === 0) {
+      setLoaderIs(true);
       axios({
         method: "post",
         url: "/company/login",
@@ -43,10 +46,16 @@ function CompanyLogin() {
               title: "Invalid Company ID or Password",
               text: "Company is not found",
             });
+            setLoaderIs(false);
           }
         })
         .catch((e) => {
-          console.log(e);
+          Swal.fire({
+            icon: "error",
+            title: "Opps!!!",
+            text: e.message,
+          });
+          setLoaderIs(false);
         });
     }
   };
@@ -64,6 +73,7 @@ function CompanyLogin() {
   };
   return (
     <div className="login">
+      {loaderIs && <Loader />}
       <div className="company_login_div">
         <div className="right">
           <div className="form">

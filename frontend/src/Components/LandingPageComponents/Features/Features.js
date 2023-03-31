@@ -80,7 +80,7 @@ function Features() {
         >
           <div className="feimage">
             <img
-              src="http://localhost:9000/image/feature/fe2.png"
+              src="http://142.93.165.76:9000/image/feature/fe2.png"
               className={featureDis === "three" ? "less_bri kenburns-top" : ""}
               alt=""
             />
@@ -110,7 +110,7 @@ function Features() {
         >
           <div className="feimage">
             <img
-              src="http://localhost:9000/image/feature/fe3.jpg"
+              src="http://142.93.165.76:9000/image/feature/fe3.jpg"
               className={featureDis === "two" ? "less_bri kenburns-top" : ""}
               alt=""
             />

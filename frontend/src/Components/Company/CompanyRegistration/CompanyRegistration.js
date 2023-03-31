@@ -27,11 +27,11 @@ function CompanyRegistration() {
   };
 
   const handleSubmit = (e) => {
-    setLoaderIs(true);
     e.preventDefault();
     const er = validate(formValues);
     setFormErrors(er);
     if (Object.keys(er).length === 0) {
+      setLoaderIs(true);
       axios({
         method: "post",
         url: "/company/registration",
