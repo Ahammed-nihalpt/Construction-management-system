@@ -36,6 +36,55 @@
     width: 212%;
     height: 100%;
   }
+  .cr_text {
+    position: absolute;
+    top: 265px;
+    left: 127px;
+    color: #fff;
+    z-index: 9;
+    font-size: 11px;
+    width: 238px;
+  }
+  .cr_text h1 {
+    font-size: x-large !important;
+  }
+  .cr_image .rectangle {
+    position: absolute;
+    border: 15px solid #1b2433;
+    z-index: 8;
+    top: 175px;
+    left: 36px;
+    width: 208px;
+    height: 303px;
+  }
+}
+
+@media only screen and (min-width: 600px) and (max-width: 800px) {
+  .cr_image {
+    width: 212%;
+    height: 100%;
+  }
+  .cr_text {
+    position: absolute;
+    top: 234px;
+    left: 227px;
+    color: #fff;
+    z-index: 9;
+    font-size: x-larger;
+    width: 400px;
+  }
+  .cr_text h1 {
+    font-size: xx-large !important;
+  }
+  .cr_image .rectangle {
+    position: absolute;
+    border: 15px solid #1b2433;
+    z-index: 8;
+    top: 138px;
+    left: 80px;
+    width: 311px;
+    height: 358px;
+  }
 }
 
 .tracking-in-expand {

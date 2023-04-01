@@ -138,6 +138,9 @@ function UserLogin() {
                       Login
                     </button>
                   </div>
+                  <h6 className="gobackhome" onClick={() => navigate("/")}>
+                    Go back to Home
+                  </h6>
                 </div>
               </form>
             </div>

@@ -125,3 +125,11 @@
   color: #ffffff;
   padding: 10px;
 }
+
+.gobackhome {
+  cursor: pointer;
+}
+
+.gobackhome:hover {
+  color: #8a9093;
+}

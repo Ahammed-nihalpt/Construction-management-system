@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect, useRef, useState } from "react";
 import LandingCarousel from "../../Components/LandingPageComponents/Carousel/LandingCarousel";
 import Features from "../../Components/LandingPageComponents/Features/Features";
 import LandingNav from "../../Components/LandingPageComponents/LandingNav/LandingNav";
@@ -6,6 +6,29 @@ import About from "../../Components/LandingPageComponents/LandingPageContent/Abo
 import LoginSignup from "../../Components/LandingPageComponents/LoginSignup/LoginSignup";
 
 function LandingPage() {
+  const myRef = useRef(null);
+  const [backgroundColor, setBackgroundColor] = useState("transparent");
+  useEffect(() => {
+    console.log(window.scrollY);
+    function handleScroll() {
+      console.log("window.scrollY");
+      if (window.scrollY > 100) {
+        setBackgroundColor("lightblue");
+      } else {
+        setBackgroundColor("transparent");
+      }
+    }
+
+    window.addEventListener("scroll", () => {
+      console.log("sdf");
+    });
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+  const executeScroll = () => myRef.current.scrollIntoView();
+  console.log(myRef);
   return (
     <div className="landing_page">
       <div className="animation-area">
@@ -18,11 +41,11 @@ function LandingPage() {
           <li></li>
         </ul>
       </div>
-      <LandingNav />
+      <LandingNav executeScroll={executeScroll} bgColor={backgroundColor} />
       <LandingCarousel />
       <About />
       <Features />
-      <LoginSignup />
+      <LoginSignup myRef={myRef} />
     </div>
   );
 }

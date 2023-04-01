@@ -8,7 +8,10 @@ function About() {
         <h1 className="focus-in-expand-fwd mt-5">About</h1>
         <div className="about_main">
           <div className=" about_image">
-            <img src="https://www.cpms.site:9000/image/aboutimg.jpg" alt="" />
+            <img
+              src="https://www.cpms.site/backend/image/aboutimg.jpg"
+              alt=""
+            />
           </div>
           <div className="about_text">
             <h4>A Vision of Better Building.</h4>
