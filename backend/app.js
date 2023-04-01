@@ -30,7 +30,7 @@ const userRouter = require('./Routes/UserRouter');
 const adminRouter = require('./Routes/AdminRouter');
 const chatRouter = require('./Routes/ChatRouter');
 
-app.use('/backend/company', companyRouter);
+app.use('/company', companyRouter);
 app.use('/backend/user', userRouter);
 app.use('/backend/admin', adminRouter);
 app.use('/backend/chat', chatRouter);
