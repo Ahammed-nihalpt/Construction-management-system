@@ -1,7 +1,8 @@
 import axios from "axios";
+import { Base_URL } from "../../Keys";
 
 const instance = axios.create({
-  baseURL: "https://www.cpms.site/backend/",
+  baseURL: Base_URL,
   // timeout: 1000,
   headers: { "X-Custom-Header": "foobar" },
 });
