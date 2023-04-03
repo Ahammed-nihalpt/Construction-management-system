@@ -13,7 +13,7 @@ const images = [
     text: "Collaborate, communicate, and conquer with our construction project management solution.",
   },
   {
-    image: "https://www.cpms.site/backend/image/carousel/2.jpg",
+    image: "https://www.cpms.site/backend//image/carousel/2.jpg",
     head: `Construction Project Management System`,
     text: "Collaborate, communicate, and conquer with our construction project management solution.",
   },
