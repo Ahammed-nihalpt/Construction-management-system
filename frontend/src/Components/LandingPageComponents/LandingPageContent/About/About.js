@@ -9,7 +9,7 @@ function About() {
         <div className="about_main">
           <div className=" about_image">
             <img
-              src="https://www.cpms.site/backend/image/aboutimg.jpg"
+              src="https://www.cpms.site/backend/static/image/aboutimg.jpg"
               alt=""
             />
           </div>

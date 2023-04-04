@@ -20,7 +20,7 @@ function MessageSide({ id, account }) {
   const [Designation, setDesignation] = useState();
   const [socketConnect, setSocketConnect] = useState();
   useEffect(() => {
-    const socket = io("http://localhost:9000", {
+    const socket = io("https://cpms.site/backend", {
       query: {
         userId: localStorage.getItem("id"),
       },

@@ -52,7 +52,7 @@ function Features() {
         >
           <div className="feimage">
             <img
-              src="https://www.cpms.site/backend/image/feature/fe 1.jpg"
+              src="https://www.cpms.site/backend/static/image/feature/fe 1.jpg"
               className={featureDis === "one" ? "less_bri kenburns-top" : ""}
               alt=""
             />
@@ -80,7 +80,7 @@ function Features() {
         >
           <div className="feimage">
             <img
-              src="https://www.cpms.site/backend/image/feature/fe2.png"
+              src="https://www.cpms.site/backend/static/image/feature/fe2.png"
               className={featureDis === "three" ? "less_bri kenburns-top" : ""}
               alt=""
             />
@@ -110,7 +110,7 @@ function Features() {
         >
           <div className="feimage">
             <img
-              src="https://www.cpms.site/backend/image/feature/fe3.jpg"
+              src="https://www.cpms.site/backend/static/image/feature/fe3.jpg"
               className={featureDis === "two" ? "less_bri kenburns-top" : ""}
               alt=""
             />

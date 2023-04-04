@@ -14,7 +14,7 @@ function Dashboard() {
   const navigate = useNavigate();
   const [projects, setProjects] = useState([]);
   const [designations, setDesignations] = useState([]);
-  const [users, setUsers] = useState();
+  const [users, setUsers] = useState([]);
   Chart.register(ArcElement, Tooltip, Legend);
   const data = {
     labels: ["Pending Project", "Compeleted Project"],
@@ -50,9 +50,10 @@ function Dashboard() {
         }
       })
       .catch((error) => {
+        console.log(error);
         Swal.fire({
           icon: "error",
-          title: "401",
+          title: "400",
           text: "Error Unauthorized Access",
         }).then(() => {
           navigate("/");
@@ -60,17 +61,21 @@ function Dashboard() {
       });
     getUserEndPoint(localStorage.getItem("id"))
       .then((response) => {
-        const data = response.data.users.users;
-        getDesignationEndPoint(localStorage.getItem("id")).then((res) => {
-          const de = res.data.designation;
-          setDesignations(de);
-          setUsers(data);
-        });
+        console.log(response);
+        if (response.data.users) {
+          const data = response.data.users.users;
+          getDesignationEndPoint(localStorage.getItem("id")).then((res) => {
+            const de = res.data.designation;
+            setDesignations(de);
+            setUsers(data);
+          });
+        }
       })
       .catch((error) => {
+        console.log(error);
         Swal.fire({
           icon: "error",
-          title: "401",
+          title: "400",
           text: "Error Unauthorized Access",
         }).then(() => {
           navigate("/");
@@ -107,11 +112,7 @@ function Dashboard() {
                   <label>{project.location}</label>
                 </div>
               ))}
-            {projects.length < 0 && (
-              <div>
-                <label>No projects yet</label>
-              </div>
-            )}
+            {projects.length <= 0 && <label>No projects yet</label>}
           </div>
         </div>
         <div className="pulist">
@@ -135,11 +136,7 @@ function Dashboard() {
                     )}
                 </div>
               ))}
-            {users && users.length < 0 && (
-              <div>
-                <label>No user yet</label>
-              </div>
-            )}
+            {users && users.length <= 0 && <label>No user yet</label>}
           </div>
         </div>
       </div>

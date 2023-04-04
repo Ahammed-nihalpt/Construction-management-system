@@ -19,15 +19,12 @@ function LandingPage() {
       }
     }
 
-    window.addEventListener("scroll", () => {
-      console.log("sdf");
-    });
-
     return () => {
       window.removeEventListener("scroll", handleScroll);
     };
   }, []);
-  const executeScroll = () => myRef.current.scrollIntoView();
+  const executeScroll = () =>
+    myRef.current.scrollIntoView({ behavior: "smooth" });
   console.log(myRef);
   return (
     <div className="landing_page">

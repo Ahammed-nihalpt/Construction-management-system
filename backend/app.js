@@ -16,7 +16,7 @@ dotenv.config();
 app.use(fileupload());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(express.static(path.join(__dirname, 'Public')));
+app.use('/static', express.static(path.join(__dirname, 'Public')));
 
 mongoose.connect('mongodb://127.0.0.1:27017/constructionManagementSystem', {
   useNewUrlParser: true,
@@ -39,7 +39,7 @@ app.use('/backend/chat', chatRouter);
 const socketio = require('socket.io');
 const { createChat } = require('./Controllers/ChatController');
 
-const http = require('http').createServer(app);
+const http = require('https').createServer(app);
 
 const io = socketio(http, {
   cors: {
