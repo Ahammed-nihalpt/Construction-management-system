@@ -197,6 +197,7 @@ const getCMPId = async (req, res) => {
 
 const login = async (req, res) => {
   try {
+    console.log('reched');
     const { cmpid, password } = req.body;
     const doc = await companyModel.Registration.findOne({
       company_id: cmpid,
