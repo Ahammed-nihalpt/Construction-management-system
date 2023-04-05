@@ -13,7 +13,6 @@ const app = express();
 
 app.use(cors());
 dotenv.config();
-app.options('*', cors());
 app.use(fileupload());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
