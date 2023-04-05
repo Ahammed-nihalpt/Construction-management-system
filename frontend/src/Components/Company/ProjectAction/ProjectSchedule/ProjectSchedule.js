@@ -56,6 +56,7 @@ function ProjectSchedule({ id, user }) {
 
   useEffect(() => {
     getSchedulesEndPoint(id).then((response) => {
+      console.log(response);
       if (response.data.success) {
         const docs = response.data.docs;
         setSchedules(docs);
@@ -65,11 +66,12 @@ function ProjectSchedule({ id, user }) {
           title: "Opps!!!",
           text: "Something went wrong",
         }).then(() => {
-          navigate("/admin/login");
+          navigate("/");
         });
       }
     });
-  });
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, []);
 
   const onSelectDate = (e) => {
     const edate = e;

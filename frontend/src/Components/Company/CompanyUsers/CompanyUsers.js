@@ -23,10 +23,13 @@ function CompanyUsers() {
   useEffect(() => {
     getUserEndPoint(localStorage.getItem("id"))
       .then((response) => {
-        const data = response.data.users.users;
-        setUsers(data);
+        if (response.data.users) {
+          const data = response.data.users.users;
+          setUsers(data);
+        }
       })
       .catch((error) => {
+        console.log(error);
         Swal.fire({
           icon: "error",
           title: "401",

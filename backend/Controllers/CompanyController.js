@@ -197,7 +197,6 @@ const getCMPId = async (req, res) => {
 
 const login = async (req, res) => {
   try {
-    console.log('reched');
     const { cmpid, password } = req.body;
     const doc = await companyModel.Registration.findOne({
       company_id: cmpid,
@@ -405,7 +404,7 @@ const getSchedules = async (req, res) => {
   try {
     const { id } = req.params;
     const data = await ScheduleModel.findOne({ project_id: id });
-    if (data.length <= 0) {
+    if (!data) {
       throw new Error('No schedules');
     }
     res.send({ success: true, docs: data });

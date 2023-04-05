@@ -39,7 +39,7 @@ app.use('/backend/chat', chatRouter);
 const socketio = require('socket.io');
 const { createChat } = require('./Controllers/ChatController');
 
-const http = require('https').createServer(app);
+const http = require('http').createServer(app);
 
 const io = socketio(http, {
   cors: {
