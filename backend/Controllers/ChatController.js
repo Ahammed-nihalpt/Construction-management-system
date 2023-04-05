@@ -9,6 +9,7 @@ const UserModel = require('../Models/UserModel');
 const DesignationModel = require('../Models/DesignationModel');
 
 const createChat = async (sender, receiver, content) => {
+  console.log(content);
   try {
     const Chk = await ChatModel.findOne({ sender, receiver });
     if (Chk) {
@@ -105,7 +106,6 @@ const getUsersAndUreadedChat = async (req, res) => {
       },
     ]);
 
-    console.log(unread);
     res.send({ success: true, data: result, unread });
   } catch (error) {
     res.send({ success: true, message: error.message });

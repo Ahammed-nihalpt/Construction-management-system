@@ -1,7 +1,10 @@
 import React, { useEffect, useState } from "react";
 import "./CompanyUsers.css";
 import { useNavigate } from "react-router-dom";
-import { getUserEndPoint } from "../../../Helpers/config/axiosEndpoints";
+import {
+  getDesignationEndPoint,
+  getUserEndPoint,
+} from "../../../Helpers/config/axiosEndpoints";
 import Swal from "sweetalert2";
 
 function CompanyUsers() {
@@ -9,6 +12,7 @@ function CompanyUsers() {
   const [users, setUsers] = useState();
   const [searchQuery, setSearchQuery] = useState("");
   const [result, setResult] = useState([]);
+  const [designations, setDesignations] = useState([]);
 
   const handleSearch = (event) => {
     setSearchQuery(event.target.value);
@@ -26,6 +30,15 @@ function CompanyUsers() {
         if (response.data.users) {
           const data = response.data.users.users;
           setUsers(data);
+          getDesignationEndPoint(localStorage.getItem("id")).then(
+            (response) => {
+              if (response.data.success) {
+                const doc = response.data.designation;
+
+                setDesignations(doc);
+              }
+            }
+          );
         }
       })
       .catch((error) => {
@@ -99,7 +112,14 @@ function CompanyUsers() {
                   <div className="project_des">
                     <label className="title">{value.name}</label>
                     <label className="location">{value.contact}</label>
-                    <label className="location">Site Incharge</label>
+                    {designations &&
+                      designations.map((values) => (
+                        <label className="location">
+                          {values._id === value.designation_id
+                            ? values.designation
+                            : ""}
+                        </label>
+                      ))}
                   </div>
                 </div>
               </div>

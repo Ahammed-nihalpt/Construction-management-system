@@ -14,7 +14,7 @@ import {
 import SingleMessage from "../SingleMessage/SingleMessage";
 
 function MessageSide({ id, account }) {
-  const [sendMsg, setSnedMsg] = useState();
+  const [sendMsg, setSnedMsg] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [user, setUser] = useState({});
   const [Designation, setDesignation] = useState();
@@ -28,13 +28,19 @@ function MessageSide({ id, account }) {
     setSocketConnect(socket);
     if (id) {
       getChatHistoryUser(localStorage.getItem("id"), id).then((respon) => {
-        const smsg = respon.data.sndMessage[0].message;
-        const rmsg = respon.data.receiveMessage[0].message;
+        console.log(respon);
+        if (
+          respon.data.sndMessage.length > 0 ||
+          respon.data.receiveMessage.length > 0
+        ) {
+          const smsg = respon.data.sndMessage[0].message;
+          const rmsg = respon.data.receiveMessage[0].message;
 
-        const filsndmsg = smsg.map((msg) => ({ ...msg, sender: true }));
-        const filremsg = rmsg.map((msg) => ({ ...msg, sender: false }));
-        const msg = filremsg.concat(filsndmsg);
-        setSnedMsg(msg);
+          const filsndmsg = smsg.map((msg) => ({ ...msg, sender: true }));
+          const filremsg = rmsg.map((msg) => ({ ...msg, sender: false }));
+          const msg = filremsg.concat(filsndmsg);
+          setSnedMsg(msg);
+        }
       });
     }
 
