@@ -11,6 +11,7 @@ import {
   clearUnreadUser,
 } from "../../../Helpers/config/axiosUserEndpoins";
 import Swal from "sweetalert2";
+import { Image_URL } from "../../../Keys";
 import { useNavigate } from "react-router-dom";
 
 function ChatList(props) {
@@ -89,7 +90,7 @@ function ChatList(props) {
             >
               <div>
                 <img
-                  src={`http://localhost:9000/image/user/${value.image}.jpg`}
+                  src={`${Image_URL}/image/user/${value.image}.jpg`}
                   alt="asdf"
                 />
               </div>

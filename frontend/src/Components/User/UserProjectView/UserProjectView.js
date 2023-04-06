@@ -6,6 +6,7 @@ import {
   getUserDataEndpoint,
   getUserProjectsEndpoint,
 } from "../../../Helpers/config/axiosUserEndpoins";
+import { Image_URL } from "../../../Keys";
 
 function UserProjectView() {
   const navigate = useNavigate();
@@ -104,7 +105,7 @@ function UserProjectView() {
                 >
                   <div className="project_card">
                     <img
-                      src={`http://localhost:9000/image/projects/${val.image}.jpg`}
+                      src={`${Image_URL}/image/projects/${val.image}.jpg`}
                       className="card-img-top"
                       alt="..."
                     />
@@ -130,7 +131,7 @@ function UserProjectView() {
                 >
                   <div className="project_card">
                     <img
-                      src={`http://localhost:9000/image/projects/${val.image}.jpg`}
+                      src={`${Image_URL}/image/projects/${val.image}.jpg`}
                       className="card-img-top"
                       alt="..."
                     />

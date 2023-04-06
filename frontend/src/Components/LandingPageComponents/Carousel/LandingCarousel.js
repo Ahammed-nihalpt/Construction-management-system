@@ -1,19 +1,20 @@
 import React, { useEffect, useState } from "react";
+import { Image_URL } from "../../../Keys";
 import "./LandingCarousel.css";
 
 const images = [
   {
-    image: "https://www.cpms.site/backend/static/image/carousel/1.jpg",
+    image: `${Image_URL}/image/carousel/1.jpg`,
     head: `Construction Project Management System`,
     text: "Collaborate, communicate, and conquer with our construction project management solution.",
   },
   {
-    image: "https://www.cpms.site/backend/static/image/carousel/3.jpg",
+    image: `${Image_URL}/image/carousel/3.jpg`,
     head: `Construction Project Management System`,
     text: "Collaborate, communicate, and conquer with our construction project management solution.",
   },
   {
-    image: "https://www.cpms.site/backend/static/image/carousel/2.jpg",
+    image: `${Image_URL}/image/carousel/2.jpg`,
     head: `Construction Project Management System`,
     text: "Collaborate, communicate, and conquer with our construction project management solution.",
   },

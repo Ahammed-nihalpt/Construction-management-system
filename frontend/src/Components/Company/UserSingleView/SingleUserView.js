@@ -7,6 +7,7 @@ import {
   getUserEndPoint,
   getDesignationEndPoint,
 } from "../../../Helpers/config/axiosEndpoints";
+import { Image_URL } from "../../../Keys";
 import { useDispatch, useSelector } from "react-redux";
 import UserEdit from "../CompanyUserAction/UserEdit/UserEdit";
 
@@ -54,7 +55,7 @@ function SingleUserView({ action }) {
             <div className="project_image col-md-6">
               <div className="img">
                 <img
-                  src={`http://localhost:9000/image/user/${userDetails.image}.jpg`}
+                  src={`${Image_URL}/image/user/${userDetails.image}.jpg`}
                   alt="..."
                 ></img>
               </div>

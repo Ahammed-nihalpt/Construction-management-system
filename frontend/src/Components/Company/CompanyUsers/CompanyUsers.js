@@ -5,6 +5,7 @@ import {
   getDesignationEndPoint,
   getUserEndPoint,
 } from "../../../Helpers/config/axiosEndpoints";
+import { Image_URL } from "../../../Keys";
 import Swal from "sweetalert2";
 
 function CompanyUsers() {
@@ -105,7 +106,7 @@ function CompanyUsers() {
               >
                 <div className="project_card">
                   <img
-                    src={`http://localhost:9000/image/user/${value.image}.jpg`}
+                    src={`${Image_URL}/image/user/${value.image}.jpg`}
                     className="card-img-top"
                     alt="..."
                   />
@@ -132,7 +133,7 @@ function CompanyUsers() {
                 <div className="single_project col-12 col-md-3">
                   <div className="project_card">
                     <img
-                      src={`http://localhost:9000/image/user/${value.image}.jpg`}
+                      src={`${Image_URL}/image/user/${value.image}.jpg`}
                       className="card-img-top"
                       alt="..."
                     />

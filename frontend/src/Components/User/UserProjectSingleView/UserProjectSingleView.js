@@ -3,6 +3,7 @@ import { useDispatch, useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 import { getSingleProjectUserEndpoint } from "../../../Helpers/config/axiosUserEndpoins";
 import { AddData } from "../../../Redux/Company/Action";
+import { Image_URL } from "../../../Keys";
 import AddUserAccess from "../../Company/ProjectAction/AddUserAccess/AddUserAccess";
 import ProjectDetails from "../../Company/ProjectAction/ProjectDetails/ProjectDetails";
 import ProjectSchedule from "../../Company/ProjectAction/ProjectSchedule/ProjectSchedule";
@@ -32,7 +33,7 @@ function UserProjectSingleView({ action }) {
           <div className="project_image col-md-6">
             <div className="img">
               <img
-                src={`http://localhost:9000/image/projects/${project.image}.jpg`}
+                src={`${Image_URL}/image/projects/${project.image}.jpg`}
                 alt="..."
               ></img>
             </div>

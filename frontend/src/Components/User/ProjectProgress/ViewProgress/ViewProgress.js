@@ -5,6 +5,7 @@ import {
   getAllProgressEndpoint,
   getLabourListEndpoint,
 } from "../../../../Helpers/config/axiosUserEndpoins";
+import { Image_URL } from "../../../../Keys";
 import Modal from "@mui/material/Modal";
 import { Box } from "@mui/material";
 
@@ -113,7 +114,7 @@ function ViewProgress({ id }) {
                       <td>
                         <img
                           style={{ width: "100px" }}
-                          src={`http://localhost:9000/image/labour/${value.image}.jpg`}
+                          src={`${Image_URL}/image/labour/${value.image}.jpg`}
                           alt=""
                         />
                       </td>

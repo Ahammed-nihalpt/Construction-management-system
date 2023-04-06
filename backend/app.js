@@ -67,6 +67,7 @@ io.on('connection', (socket) => {
   });
 
   socket.on('chat-message', (msg, rid, sid, date) => {
+    console.log('called');
     createChat(sid, rid, msg);
     const recipientSocketId = users[rid];
     if (recipientSocketId) {

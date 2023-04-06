@@ -15,6 +15,7 @@ import {
   ClickedAction,
   ToggleAction,
 } from "../../Redux/Company/Action";
+import { Image_URL } from "../../Keys";
 import LogoutSharpIcon from "@mui/icons-material/LogoutSharp";
 import {
   getPermissionEndpoint,
@@ -111,7 +112,7 @@ function Sidebar({ type }) {
             <div
               className="img"
               style={{
-                backgroundImage: `url("http://localhost:9000/image/user/${userDatas.image}.jpg")`,
+                backgroundImage: `url("${Image_URL}/image/user/${userDatas.image}.jpg")`,
               }}
             ></div>
           )}
@@ -124,14 +125,12 @@ function Sidebar({ type }) {
                       backgroundImage: `url(${
                         newImage
                           ? newImage
-                          : `http://localhost:9000/image/company/${details.image}.jpg`
+                          : `${Image_URL}/image/company/${details.image}.jpg`
                       })`,
                     }
                   : {
                       backgroundImage: `url(${
-                        newImage
-                          ? newImage
-                          : `http://localhost:9000/image/onimage.jpg`
+                        newImage ? newImage : `${Image_URL}/image/onimage.jpg`
                       })`,
                     }
               }
@@ -161,7 +160,7 @@ function Sidebar({ type }) {
             <div
               className="img"
               style={{
-                backgroundImage: `url("http://localhost:9000/image/onimage.jpg")`,
+                backgroundImage: `url("${Image_URL}/image/onimage.jpg")`,
               }}
             ></div>
           )}
@@ -169,7 +168,7 @@ function Sidebar({ type }) {
             <div
               className="img"
               style={{
-                backgroundImage: `url("http://localhost:9000/image/user/${userDatas.image}.jpg")`,
+                backgroundImage: `url("${Image_URL}/image/user/${userDatas.image}.jpg")`,
               }}
             ></div>
           )}

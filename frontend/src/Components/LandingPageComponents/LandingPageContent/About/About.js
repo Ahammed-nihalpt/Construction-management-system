@@ -1,4 +1,5 @@
 import React from "react";
+import { Image_URL } from "../../../../Keys";
 import "./About.css";
 
 function About() {
@@ -8,10 +9,7 @@ function About() {
         <h1 className="focus-in-expand-fwd mt-5">About</h1>
         <div className="about_main">
           <div className=" about_image">
-            <img
-              src="https://www.cpms.site/backend/static/image/aboutimg.jpg"
-              alt=""
-            />
+            <img src={`${Image_URL}/image/aboutimg.jpg`} alt="" />
           </div>
           <div className="about_text">
             <h4>A Vision of Better Building.</h4>

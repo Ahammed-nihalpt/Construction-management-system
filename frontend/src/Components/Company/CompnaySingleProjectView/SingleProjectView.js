@@ -7,6 +7,7 @@ import "./SingleProjectView.css";
 import { useDispatch, useSelector } from "react-redux";
 import { AddData } from "../../../Redux/Company/Action";
 import { getSingleProject } from "../../../Helpers/config/axiosEndpoints";
+import { Image_URL } from "../../../Keys";
 import ProjectDetails from "../ProjectAction/ProjectDetails/ProjectDetails";
 import AddUserAccess from "../ProjectAction/AddUserAccess/AddUserAccess";
 import ViewProgress from "../../User/ProjectProgress/ViewProgress/ViewProgress";
@@ -34,7 +35,7 @@ function SingleProjectView({ action }) {
           <div className="project_image col-md-6">
             <div className="img">
               <img
-                src={`http://localhost:9000/image/projects/${project.image}.jpg`}
+                src={`${Image_URL}/image/projects/${project.image}.jpg`}
                 alt="..."
               ></img>
             </div>

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import "./CompanyProjectView.css";
 import { getAllProjects } from "../../../Helpers/config/axiosEndpoints";
+import { Image_URL } from "../../../Keys";
 import Swal from "sweetalert2";
 
 function CompanyProjectView() {
@@ -96,7 +97,7 @@ function CompanyProjectView() {
                 >
                   <div className="project_card">
                     <img
-                      src={`http://localhost:9000/image/projects/${val.image}.jpg`}
+                      src={`${Image_URL}/image/projects/${val.image}.jpg`}
                       className="card-img-top"
                       alt="..."
                     />
@@ -122,7 +123,7 @@ function CompanyProjectView() {
                 >
                   <div className="project_card">
                     <img
-                      src={`http://localhost:9000/image/projects/${val.image}.jpg`}
+                      src={`${Image_URL}/image/projects/${val.image}.jpg`}
                       className="card-img-top"
                       alt="..."
                     />

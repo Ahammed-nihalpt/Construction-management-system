@@ -59,11 +59,6 @@ export const userSidebarData = [
     link: "/user/payment",
     icon: <PaidSharpIcon />,
   },
-  {
-    title: "Reports",
-    link: "/home",
-    icon: <SummarizeSharpIcon />,
-  },
 ];
 
 export const adminSideData = [

@@ -11,6 +11,7 @@ import {
   getChatHistoryUser,
   getUserDataEndpoint,
 } from "../../../Helpers/config/axiosUserEndpoins";
+import { Image_URL } from "../../../Keys";
 import SingleMessage from "../SingleMessage/SingleMessage";
 
 function MessageSide({ id, account }) {
@@ -114,10 +115,7 @@ function MessageSide({ id, account }) {
     <div className="messageside">
       <div className="ms_head">
         {id && user && (
-          <img
-            src={`http://localhost:9000/image/user/${user.image}.jpg`}
-            alt=""
-          />
+          <img src={`${Image_URL}/image/user/${user.image}.jpg`} alt="" />
         )}
         <div>
           <label className="user_details">{user && user.name}</label>
