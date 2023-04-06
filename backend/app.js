@@ -16,7 +16,7 @@ dotenv.config();
 app.use(fileupload());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use('/static', express.static(path.join(__dirname, 'Public')));
+app.use('/public', express.static(path.join(__dirname, 'Public')));
 
 mongoose.connect('mongodb://127.0.0.1:27017/constructionManagementSystem', {
   useNewUrlParser: true,
