@@ -21,22 +21,32 @@ function MessageSide({ id, account }) {
   const [Designation, setDesignation] = useState();
   const [socketConnect, setSocketConnect] = useState();
   useEffect(() => {
-    const socket = io("https://cpms.site/backend", {
+    const socket = io("https://cpms.site", {
       query: {
         userId: localStorage.getItem("id"),
       },
     });
     setSocketConnect(socket);
     if (id) {
+      setSnedMsg([]);
       getChatHistoryUser(localStorage.getItem("id"), id).then((respon) => {
-        console.log(respon);
         if (
-          respon.data.sndMessage.length > 0 ||
-          respon.data.receiveMessage.length > 0
+          respon.data.sndMessage.length > 0 &&
+          respon.data.receiveMessage.length <= 0
         ) {
           const smsg = respon.data.sndMessage[0].message;
+          const filsndmsg = smsg.map((msg) => ({ ...msg, sender: true }));
+          setSnedMsg(filsndmsg);
+        } else if (
+          respon.data.sndMessage.length <= 0 &&
+          respon.data.receiveMessage.length > 0
+        ) {
           const rmsg = respon.data.receiveMessage[0].message;
-
+          const filremsg = rmsg.map((msg) => ({ ...msg, sender: false }));
+          setSnedMsg(filremsg);
+        } else {
+          const smsg = respon.data.sndMessage[0].message;
+          const rmsg = respon.data.receiveMessage[0].message;
           const filsndmsg = smsg.map((msg) => ({ ...msg, sender: true }));
           const filremsg = rmsg.map((msg) => ({ ...msg, sender: false }));
           const msg = filremsg.concat(filsndmsg);

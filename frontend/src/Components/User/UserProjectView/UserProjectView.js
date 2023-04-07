@@ -41,7 +41,6 @@ function UserProjectView() {
           (response) => {
             if (response.data.success) {
               const per = response.data.doc;
-              console.log(per);
               setPermissions(per);
             }
           }
@@ -71,7 +70,7 @@ function UserProjectView() {
         <button className="filbtn">Completed</button>
       </div>
       <div className="add_seacrh">
-        {Object.keys(permissions).length > 0 && permissions.project.add && (
+        {/* {Object.keys(permissions).length > 0 && permissions.project.add && (
           <button
             className="filbtn"
             onClick={() => {
@@ -80,7 +79,7 @@ function UserProjectView() {
           >
             Add Project
           </button>
-        )}
+        )} */}
         <div className="search">
           <input
             type="text"

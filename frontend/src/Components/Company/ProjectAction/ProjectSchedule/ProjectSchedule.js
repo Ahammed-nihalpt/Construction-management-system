@@ -16,6 +16,7 @@ import {
 } from "../../../../Helpers/config/axiosEndpoints";
 import MuiAlert from "@mui/material/Alert";
 import { useNavigate } from "react-router-dom";
+import SingleSchedule from "./SingleSchedule";
 
 function ProjectSchedule({ id, user }) {
   const navigate = useNavigate();
@@ -38,9 +39,9 @@ function ProjectSchedule({ id, user }) {
       confirmButtonText: "Add",
       showLoaderOnConfirm: true,
       preConfirm: (schedule) => {
+        dateSchedule.push({ date: schedule, schedule, _id: "asdfaf" });
         return addScheduleEndPoint(id, value, schedule)
           .then((response) => {
-            console.log(response);
             if (!response.data.success) {
               throw new Error(response.statusText);
             }
@@ -57,7 +58,6 @@ function ProjectSchedule({ id, user }) {
   useEffect(() => {
     getSchedulesEndPoint(id)
       .then((response) => {
-        console.log(response);
         if (response.data.success) {
           const docs = response.data.docs;
           setSchedules(docs);
@@ -73,12 +73,11 @@ function ProjectSchedule({ id, user }) {
         });
       });
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, []);
+  }, [dateSchedule]);
 
   const onSelectDate = (e) => {
     const edate = e;
     onChange(edate);
-    console.log(scheduleDocs);
     if (Object.keys(scheduleDocs).length > 0) {
       const data = scheduleDocs.schedules.filter((value) => {
         const day1 = new Date(e).getDate();
@@ -127,28 +126,33 @@ function ProjectSchedule({ id, user }) {
               }-${value.getFullYear()}`}</label>
               <div>
                 <label className="addicon">
-                  <Tooltip title="Add" onClick={addSchedlue}>
-                    <IconButton>
-                      <AddCircleIcon />
-                    </IconButton>
-                  </Tooltip>
+                  {dateSchedule.length <= 0 && (
+                    <Tooltip title="Add" onClick={addSchedlue}>
+                      <IconButton>
+                        <AddCircleIcon />
+                      </IconButton>
+                    </Tooltip>
+                  )}
                 </label>
                 <label>
-                  <Tooltip title="Delete" onClick={onClickDelete}>
-                    <IconButton>
-                      <DeleteIcon />
-                    </IconButton>
-                  </Tooltip>
+                  {dateSchedule.length > 0 && (
+                    <Tooltip title="Delete" onClick={onClickDelete}>
+                      <IconButton>
+                        <DeleteIcon />
+                      </IconButton>
+                    </Tooltip>
+                  )}
                 </label>
               </div>
             </div>
-            <div className="schedules_body">
+            {/* <div className="schedules_body">
               {dateSchedule.length > 0 &&
                 dateSchedule.map((value) => <label>{value.schedule}</label>)}
               {dateSchedule.length <= 0 && (
                 <label>No schedule on this date</label>
               )}
-            </div>
+            </div> */}
+            <SingleSchedule dateSchedule={dateSchedule} />
           </div>
         </div>
       </div>

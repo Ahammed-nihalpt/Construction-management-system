@@ -20,7 +20,7 @@ function Dashboard() {
     labels: ["Pending Project", "Compeleted Project"],
     datasets: [
       {
-        data: [100, 0],
+        data: [1, 0],
         backgroundColor: ["#1B2433", "#2C4265"],
         hoverBackgroundColor: ["#1B2433", "#2C4265"],
       },

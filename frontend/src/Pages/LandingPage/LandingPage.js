@@ -9,9 +9,7 @@ function LandingPage() {
   const myRef = useRef(null);
   const [backgroundColor, setBackgroundColor] = useState("transparent");
   useEffect(() => {
-    console.log(window.scrollY);
     function handleScroll() {
-      console.log("window.scrollY");
       if (window.scrollY > 100) {
         setBackgroundColor("lightblue");
       } else {
@@ -25,7 +23,7 @@ function LandingPage() {
   }, []);
   const executeScroll = () =>
     myRef.current.scrollIntoView({ behavior: "smooth" });
-  console.log(myRef);
+
   return (
     <div className="landing_page">
       <div className="animation-area">

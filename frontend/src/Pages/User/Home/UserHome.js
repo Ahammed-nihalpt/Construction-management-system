@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { useSelector } from "react-redux";
 import Sidebar from "../../../Components/Sidebar/sidebar";
 import Topnav from "../../../Components/Topnav/Topnav";
+import UserDashboard from "../../../Components/User/Dashboard/UserDashboard";
 
 function UserHome() {
   // eslint-disable-next-line no-unused-vars
@@ -19,6 +20,7 @@ function UserHome() {
         <div className="top_nav">
           <Topnav />
         </div>
+        <UserDashboard />
       </div>
     </div>
   );
